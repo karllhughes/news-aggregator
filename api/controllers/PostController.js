@@ -41,9 +41,10 @@ module.exports = {
       }
     };
 
-    const newPosts = feedbinPosts.map(convertEntryToPost);
+    const newPosts = feedbinPosts.map(convertEntryToPost)
+      .map(post => Post.findOrCreate({feedbinId: post.feedbinId}, post));
 
-    await Promise.all(newPosts.map(post => Post.findOrCreate({feedbinId: post.feedbinId}, post)));
+    await Promise.all(newPosts);
 
     return {found: newPosts.length};
   }

@@ -57,9 +57,9 @@ module.exports = {
     //  ╠═╣╚═╗╚═╗║ ║║  ║╠═╣ ║ ║║ ║║║║╚═╗
     //  ╩ ╩╚═╝╚═╝╚═╝╚═╝╩╩ ╩ ╩ ╩╚═╝╝╚╝╚═╝
 
-    posts: {
-      collection: 'post',
-    },
+    // posts: {
+    //   collection: 'post',
+    // },
 
   },
 
