@@ -8,6 +8,7 @@ const Feedbin = require('feedbin-nodejs');
  */
 
 module.exports = {
+
   collect: async function () {
     // Get subscriptions from the feedbin API
     const feedbin = new Feedbin(sails.config.feedbin.username, sails.config.feedbin.password);
