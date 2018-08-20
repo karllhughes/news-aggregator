@@ -7,7 +7,7 @@ services:
     volumes:
     - ./:/app
   mongo:
-    image: mongo
+    image: mongo:3.2-jessie
     volumes:
     - db:/data/db
     ports:
