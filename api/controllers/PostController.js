@@ -42,7 +42,13 @@ module.exports = {
     };
 
     const newPosts = feedbinPosts.map(convertEntryToPost)
-      .map(post => Post.findOrCreate({feedbinId: post.feedbinId}, post));
+      .map(async (post) => {
+        try {
+          return await Post.findOrCreate({feedbinId: post.feedbinId}, post);
+        } catch (e) {
+          sails.log(e);
+        }
+      });
 
     await Promise.all(newPosts);
 

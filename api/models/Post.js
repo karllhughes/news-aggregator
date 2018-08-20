@@ -44,14 +44,13 @@ module.exports = {
 
     feedbinId: {
       type: 'number',
-      required: false,
-      allowNull: true,
+      required: true,
+      unique: true,
     },
 
     feedbinFeedId: {
       type: 'number',
-      required: false,
-      allowNull: true,
+      required: true,
     },
 
     feedbinCreatedAt: {

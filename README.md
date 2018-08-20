@@ -39,6 +39,16 @@ hyper run --rm --env-file=.env --link=news-db --size m1 karllhughes/news node no
 hyper run --rm --env-file=.env --link=news-db --size m1 karllhughes/news node node_modules/.bin/sails run collect-posts
 ```
 
+Set up Hyper.sh cron jobs to automatically run the collectors:
+
+```bash
+# Run source collector every 4 hours
+hyper cron create --hour=*/4 --minute=0 --env-file=.env --link=news-db --size m1 --name news-sources-cron karllhughes/news node node_modules/.bin/sails run collect-sources
+
+# Run post collector every 1 hour
+hyper cron create --hour=* --minute=2 --env-file=.env --link=news-db --size m1 --name news-posts-cron karllhughes/news node node_modules/.bin/sails run collect-posts
+```
+
 Run a web instance (optional):
 
 ```bash
