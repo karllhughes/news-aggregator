@@ -1,5 +1,7 @@
 const Feedbin = require('feedbin-nodejs');
 const moment = require('moment');
+const fetch = require('node-fetch');
+const unfluff = require('unfluff');
 
 /**
  * PostController
@@ -10,7 +12,7 @@ const moment = require('moment');
 
 module.exports = {
 
-  collect: async function () {
+  collect: async () => {
     let since = moment().subtract(24, 'hours').toISOString();
 
     // Get most post most recently created at
@@ -46,13 +48,52 @@ module.exports = {
         try {
           return await Post.findOrCreate({feedbinId: post.feedbinId}, post);
         } catch (e) {
-          sails.log(e);
+          console.error(e);
         }
       });
 
     await Promise.all(newPosts);
 
     return {found: newPosts.length};
+  },
+
+  appendUnfluffContent: async () => {
+
+    // Get posts without unfluffedAt set
+    const posts = await Post.find({
+      where: { unfluffedAt: null },
+      sort: 'feedbinCreatedAt DESC',
+      limit: 100,
+    });
+
+    // Unfluff each
+    const unfluffResults = posts.map(async (post) => {
+      let updatedPost = { unfluffedAt: new Date() };
+
+      try {
+        updatedPost = await fetch(post.url).then(res => res.text()).then(html => {
+          const unfluffed = unfluff(html);
+          return {
+            unfluffedAt: new Date(),
+            text: unfluffed.text,
+            imageUrl: unfluffed.image,
+            metaTags: unfluffed.tags,
+            embeddedLinks: unfluffed.links,
+          };
+        });
+      } catch (e) {
+        console.error(e);
+      }
+
+      // Save the results
+      try {
+        return await Post.update({id: post.id}, updatedPost);
+      } catch (e) {
+        console.error(e);
+      }
+    });
+
+    return await Promise.all(unfluffResults);
   }
 
 };

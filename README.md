@@ -11,8 +11,9 @@ a [Sails v1](https://sailsjs.com) application
 
 ### Command-line scripts
 
-- `npm run collect:sources` Collect and sync sources from Feedbin with the application database.
-- `npm run collect:posts` Collect the latest posts from Feedbin and save to the application database
+- `npm run sources:collect` Collect and sync sources from Feedbin with the application database.
+- `npm run posts:collect` Collect the latest posts from Feedbin and save to the application database
+- `npm run posts:unfluff` Get the full text, image, tags, and links using [Node Unfluff](https://github.com/ageitgey/node-unfluff).
 
 
 ## Deploying to Hyper.sh

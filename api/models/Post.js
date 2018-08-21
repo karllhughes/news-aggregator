@@ -59,6 +59,35 @@ module.exports = {
       required: false,
     },
 
+    unfluffedAt: {
+      type: 'ref',
+      columnType: 'datetime',
+      required: false,
+    },
+
+    text: {
+      type: 'string',
+      required: false,
+      allowNull: true,
+    },
+
+    imageUrl: {
+      type: 'string',
+      required: false,
+      isURL: true,
+      allowNull: true,
+    },
+
+    metaTags: {
+      type: 'json',
+      required: false,
+    },
+
+    embeddedLinks: {
+      type: 'json',
+      required: false,
+    },
+
     //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗
     //  ║╣ ║║║╠╩╗║╣  ║║╚═╗
     //  ╚═╝╩ ╩╚═╝╚═╝═╩╝╚═╝
