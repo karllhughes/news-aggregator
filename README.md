@@ -44,6 +44,9 @@ Set up Hyper.sh cron jobs to automatically run the collectors:
 # Run source collector every 4 hours
 hyper cron create --hour=*/4 --minute=0 --env-file=.env --link=news-db --size m1 --name news-sources-cron karllhughes/news node node_modules/.bin/sails run collect-sources
 
+# Run source meta collector every 4 hours
+hyper cron create --hour=*/4 --minute=6 --env-file=.env --link=news-db --size m1 --name news-source-meta-cron karllhughes/news node node_modules/.bin/sails run collect-metadata-for-sources
+
 # Run post collector every 1 hour
 hyper cron create --hour=* --minute=2 --env-file=.env --link=news-db --size m1 --name news-posts-cron karllhughes/news node node_modules/.bin/sails run collect-posts
 

@@ -36,6 +36,7 @@
     "app:up": "docker-compose up -d",
     "app:down": "docker-compose down",
     "sources:collect": "docker exec -it news-aggregator-2_app_1 node node_modules/.bin/sails run collect-sources",
+    "sources:collect-metadata": "docker exec -it news-aggregator-2_app_1 node node_modules/.bin/sails run collect-metadata-for-sources",
     "posts:collect": "docker exec -it news-aggregator-2_app_1 node node_modules/.bin/sails run collect-posts",
     "posts:unfluff": "docker exec -it news-aggregator-2_app_1 node node_modules/.bin/sails run unfluff-posts"
   },

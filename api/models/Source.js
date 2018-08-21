@@ -47,6 +47,22 @@ module.exports = {
       required: false,
     },
 
+    logo: {
+      type: 'json',
+      required: false,
+    },
+
+    image: {
+      type: 'json',
+      required: false,
+    },
+
+    description: {
+      type: 'string',
+      required: false,
+      allowNull: true,
+    },
+
     //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗
     //  ║╣ ║║║╠╩╗║╣  ║║╚═╗
     //  ╚═╝╩ ╩╚═╝╚═╝═╩╝╚═╝
