@@ -48,7 +48,7 @@ hyper cron create --hour=*/4 --minute=0 --env-file=.env --link=news-db --size m1
 hyper cron create --hour=* --minute=2 --env-file=.env --link=news-db --size m1 --name news-posts-cron karllhughes/news node node_modules/.bin/sails run collect-posts
 
 # Run post unfluffer every 1 hour
-hyper cron create --hour=* --minute=4 --env-file=.env --link=news-db --size m1 --name news-posts-cron karllhughes/news node node_modules/.bin/sails run unfluff-posts
+hyper cron create --hour=* --minute=4 --env-file=.env --link=news-db --size m1 --name news-posts-unfluff-cron karllhughes/news node node_modules/.bin/sails run unfluff-posts
 ```
 
 Run a web instance (optional):
