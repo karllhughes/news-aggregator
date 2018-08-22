@@ -380,5 +380,9 @@ module.exports = {
     password: process.env.FEEDBIN_PASSWORD,
   },
 
+  sharedCount: {
+    apiKey: process.env.SHARED_COUNT_API_KEY,
+  },
+
 
 };

@@ -94,7 +94,42 @@ module.exports = {
     });
 
     return await Promise.all(unfluffResults);
-  }
+  },
+
+  appendSharedCounts: async (hoursBack) => {
+    const posts = await Post.find({
+      where: {
+        and: [{
+          or: [
+              {social: null},
+              {'social.hoursBack': {'!=': hoursBack}},
+          ]},
+          {publishedAt: {'>': moment().subtract(hoursBack, 'h').toISOString()}},
+          {publishedAt: {'<': moment().subtract(hoursBack - 1, 'h').toISOString()}},
+        ]
+      },
+    }).meta({enableExperimentalDeepTargets: true});
+
+    // Get social counts for each
+    const updatedPosts = posts.map(async (post) => {
+      try {
+        return await fetch(`https://api.sharedcount.com/v1.0/?url=${post.url}&apikey=${sails.config.sharedCount.apiKey}`)
+          .then(res => res.json())
+          .then(socialData => Post.update({id: post.id}, {
+            social: {
+              hoursBack,
+              facebook: socialData.Facebook,
+              pinterest: socialData.Pinterest,
+              linkedin: socialData.LinkedIn,
+            }
+          }));
+        } catch (e) {
+          console.error(e);
+        }
+    });
+
+    return await Promise.all(updatedPosts);
+  },
 
 };
 

@@ -88,6 +88,11 @@ module.exports = {
       required: false,
     },
 
+    social: {
+      type: 'json',
+      required: false,
+    },
+
     //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗
     //  ║╣ ║║║╠╩╗║╣  ║║╚═╗
     //  ╚═╝╩ ╩╚═╝╚═╝═╩╝╚═╝
