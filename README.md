@@ -53,8 +53,9 @@ hyper cron create --hour=* --minute=2 --env-file=.env --link=news-db --size m1 -
 # Run post unfluffer every 1 hour
 hyper cron create --hour=* --minute=4 --env-file=.env --link=news-db --size m1 --name news-posts-unfluff-cron karllhughes/news node node_modules/.bin/sails run unfluff-posts
 
-# Run share counter every 1 hour
-hyper cron create --hour=* --minute=8 --env-file=.env --link=news-db --size m1 --name news-posts-social-cron karllhughes/news node node_modules/.bin/sails run shared-count-posts
+# Run share counters every 1 hour
+hyper cron create --hour=* --minute=8 --env-file=.env --link=news-db --size s4 --name news-posts-social-24-cron karllhughes/news node node_modules/.bin/sails run shared-count-posts --hoursBack=24
+hyper cron create --hour=* --minute=8 --env-file=.env --link=news-db --size s4 --name news-posts-social-168-cron karllhughes/news node node_modules/.bin/sails run shared-count-posts --hoursBack=168
 ```
 
 Run a web instance (optional):

@@ -119,7 +119,7 @@ module.exports = {
         return await fetch(`https://api.sharedcount.com/v1.0/?url=${post.url}&apikey=${sails.config.sharedCount.apiKey}`)
           .then(res => res.json())
           .then(socialData => {
-            const socialObjectToSave = {};
+            const socialObjectToSave = {...post.social};
             socialObjectToSave[hoursBack.toString()] = {
               facebook: socialData.Facebook,
               pinterest: socialData.Pinterest,
