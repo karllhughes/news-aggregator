@@ -2,6 +2,7 @@ const Feedbin = require('feedbin-nodejs');
 const moment = require('moment');
 const fetch = require('node-fetch');
 const unfluff = require('unfluff');
+const textCounter = require('letter-count');
 
 /**
  * PostController
@@ -133,6 +134,42 @@ module.exports = {
     });
 
     return await Promise.all(updatedPosts);
+  },
+
+  processText: async () => {
+
+    // Get posts with text but no keywords
+    const posts = await Post.find({
+      where: {and: [
+        {textProcessedAt: null},
+        {text: {'!=': null}},
+      ]},
+      limit: 100,
+    });
+
+    const results = posts.map(post => {
+      try {
+        if (post.text !== '') {
+          const counts = textCounter.count(post.text);
+
+          return Post.update({id: post.id}, {
+            textProcessedAt: new Date(),
+            textMeta: {
+              characters: counts.chars,
+              lines: counts.lines,
+              words: counts.words,
+              numbers: counts.numbers,
+              letters: counts.letters,
+              wordsigns: counts.wordsigns,
+            }
+          });
+        }
+      } catch (e) {
+        console.error(e);
+      }
+    });
+
+    return await Promise.all(results);
   },
 
 };

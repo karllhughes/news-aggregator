@@ -1,6 +1,6 @@
-# news-aggregator-2
+# News App
 
-a [Sails v1](https://sailsjs.com) application
+News and blog data aggregator. Uses Feedbin, SharedCount, and open source natural language processing tools to collect data about news articles and blog posts.
 
 
 ## Local Development (With Docker)
@@ -12,8 +12,10 @@ a [Sails v1](https://sailsjs.com) application
 ### Command-line scripts
 
 - `npm run sources:collect` Collect and sync sources from Feedbin with the application database.
-- `npm run posts:collect` Collect the latest posts from Feedbin and save to the application database
+- `npm run sources:collect-metadata` Gets extra metadata about sources (eg: image, favicon, description).
+- `npm run posts:collect` Collect the latest posts from Feedbin and save to the application database.
 - `npm run posts:unfluff` Get the full text, image, tags, and links using [Node Unfluff](https://github.com/ageitgey/node-unfluff).
+- `npm run posts:social` Get social share counts from [SharedCount]().
 
 
 ## Deploying to Hyper.sh
@@ -66,6 +68,13 @@ hyper run -d --env-file=.env --link=news-db:news-db --size s4 --name news-app -p
 hyper fip attach <IP> news-app
 ```
 
+
+## Tech Stack
+
+- [Sails 1.0](https://sailsjs.com)
+- [Docker](#)
+- [Node 9](#)
+- [Hyper.sh](#)
 
 ## License
 

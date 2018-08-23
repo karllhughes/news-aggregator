@@ -93,6 +93,22 @@ module.exports = {
       required: false,
     },
 
+    textProcessedAt: {
+      type: 'ref',
+      columnType: 'datetime',
+      required: false,
+    },
+
+    textMeta: {
+      type: 'json',
+      required: false,
+    },
+
+    keywords: {
+      type: 'json',
+      required: false,
+    },
+
     //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗
     //  ║╣ ║║║╠╩╗║╣  ║║╚═╗
     //  ╚═╝╩ ╩╚═╝╚═╝═╩╝╚═╝
