@@ -15,7 +15,7 @@ News and blog data aggregator. Uses Feedbin, SharedCount, and open source natura
 - `npm run sources:collect-metadata` Gets extra metadata about sources (eg: image, favicon, description).
 - `npm run posts:collect` Collect the latest posts from Feedbin and save to the application database.
 - `npm run posts:unfluff` Get the full text, image, tags, and links using [Node Unfluff](https://github.com/ageitgey/node-unfluff).
-- `npm run posts:social` Get social share counts from [SharedCount]().
+- `npm run posts:social` Get social share counts from [SharedCount](https://www.sharedcount.com/).
 
 
 ## Deploying to Hyper.sh
@@ -31,7 +31,7 @@ hyper fip attach 123.456.78.90 news-db
 Build and push the Docker image:
 
 ```bash
-docker build -t karllhughes/news . && docker push karllhughes/news && hyper pull karllhughes/news
+npm run app:build && npm run app:deploy
 ```
 
 Run the collector(s):
