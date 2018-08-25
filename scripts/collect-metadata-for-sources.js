@@ -1,4 +1,4 @@
-const sourceController = require('../api/controllers/SourceController');
+const collectSourceMetadata = require('../api/controllers/collectors/collect-source-metadata');
 
 module.exports = {
 
@@ -13,7 +13,7 @@ module.exports = {
     sails.log('Starting "collect metadata for sources" script');
 
     try {
-      const results = await sourceController.collectMetadata();
+      const results = await collectSourceMetadata();
 
       return exits.success(`${results.length} sources updated.`);
     } catch (e) {

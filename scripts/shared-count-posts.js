@@ -1,4 +1,4 @@
-const postController = require('../api/controllers/PostController');
+const collectPostSocial = require('../api/controllers/collectors/collect-post-social');
 
 module.exports = {
 
@@ -14,7 +14,7 @@ module.exports = {
     sails.log(`Getting "shared counts" for posts ${inputs.hoursBack} hours old`);
 
     try {
-      const results = await postController.appendSharedCounts(inputs.hoursBack);
+      const results = await collectPostSocial(inputs.hoursBack);
 
       return exits.success(`${results.length} posts updated.`);
     } catch (e) {

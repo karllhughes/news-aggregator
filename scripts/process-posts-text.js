@@ -1,4 +1,4 @@
-const postController = require('../api/controllers/PostController');
+const processPostText = require('../api/controllers/processors/process-post-text');
 
 module.exports = {
 
@@ -12,7 +12,7 @@ module.exports = {
     sails.log('Starting "Process post text content" script');
 
     try {
-      const results = await postController.processText();
+      const results = await processPostText();
 
       return exits.success(`${results.length} posts processed.`);
     } catch (e) {

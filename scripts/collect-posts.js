@@ -1,4 +1,4 @@
-const postController = require('../api/controllers/PostController');
+const collectPosts = require('../api/controllers/collectors/collect-posts');
 
 module.exports = {
 
@@ -12,7 +12,7 @@ module.exports = {
     sails.log('Starting "collect posts" script');
 
     try {
-      const results = await postController.collect();
+      const results = await collectPosts();
 
       return exits.success(`${results.found} posts found.`);
     } catch (e) {

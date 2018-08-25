@@ -1,4 +1,4 @@
-const postController = require('../api/controllers/PostController');
+const collectPostText = require('../api/controllers/collectors/collect-post-text');
 
 module.exports = {
 
@@ -12,7 +12,7 @@ module.exports = {
     sails.log('Starting "unfulff posts" script');
 
     try {
-      const results = await postController.appendUnfluffContent();
+      const results = await collectPostText();
 
       return exits.success(`${results.length} posts unfluffed.`);
     } catch (e) {

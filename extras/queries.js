@@ -1,3 +1,6 @@
+// Database size in MB
+db.stats(1024 * 1024).dataSize + ' MB';
+
 // Count all posts
 db.getCollection('post').find().count();
 

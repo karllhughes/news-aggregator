@@ -1,4 +1,4 @@
-const sourceController = require('../api/controllers/SourceController');
+const collectSources = require('../api/controllers/collectors/collect-sources');
 
 module.exports = {
 
@@ -13,7 +13,7 @@ module.exports = {
     sails.log('Starting "collect sources" script');
 
     try {
-      const results = await sourceController.collect();
+      const results = await collectSources();
 
       return exits.success(`${results.created} sources created, ${results.deleted} sources deleted.`);
     } catch (e) {

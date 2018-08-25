@@ -37,11 +37,11 @@
     "app:build": "docker build -t karllhughes/news .",
     "app:deploy": "docker push karllhughes/news && hyper pull karllhughes/news",
     "sources:collect": "docker exec -it news_app_1 node node_modules/.bin/sails run collect-sources",
-    "sources:collect-metadata": "docker exec -it news_app_1 node node_modules/.bin/sails run collect-metadata-for-sources",
+    "sources:metadata": "docker exec -it news_app_1 node node_modules/.bin/sails run collect-metadata-for-sources",
     "posts:collect": "docker exec -it news_app_1 node node_modules/.bin/sails run collect-posts",
     "posts:unfluff": "docker exec -it news_app_1 node node_modules/.bin/sails run unfluff-posts",
     "posts:social": "docker exec -it news_app_1 node node_modules/.bin/sails run shared-count-posts",
-    "posts:process-text": "docker exec -it news_app_1 node node_modules/.bin/sails run process-posts-text"
+    "posts:process": "docker exec -it news_app_1 node node_modules/.bin/sails run process-posts-text"
   },
   "main": "app.js",
   "author": "karl",
