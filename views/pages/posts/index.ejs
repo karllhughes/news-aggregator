@@ -1,10 +1,19 @@
 <div id="posts">
   <div class="container">
     <div class="row">
-      <div class="col">
-        <h1>Posts</h1>
+      <div class="col mb-3">
+        <h1><a href="/posts">Posts</a></h1>
         <hr/>
-        <p>This page lists posts.</p>
+        <div class="dropdown show">
+          <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Sort By
+          </a>
+
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            <a class="dropdown-item" href="/posts">Latest</a>
+            <a class="dropdown-item" href="/posts?order_by=popular">Popular</a>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -59,6 +68,19 @@
             </div>
           </div>
         <% } %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <nav aria-label="Page navigation example">
+          <ul class="pagination">
+            <% if (pageLinks.previous !== undefined) { %>
+            <li class="page-item"><a class="page-link" href="<%= pageLinks.previous %>">Prev</a></li>
+            <% } %>
+            <li class="page-item"><a class="page-link" href="<%= pageLinks.next %>">Next</a></li>
+          </ul>
+        </nav>
       </div>
     </div>
 

@@ -1,4 +1,5 @@
 const moment = require('moment');
+const querystring = require('querystring');
 
 const PER_PAGE = 25;
 
@@ -12,6 +13,33 @@ const _joinSourcesToPosts = async (posts) => {
 
     return post;
   });
+};
+
+const _getPageLinks = (query) => {
+  const currentPage = query.page ? Number(query.page) : 1;
+  const nextPage = currentPage + 1;
+  const previousPage = currentPage - 1;
+
+  const nextQuery = {
+    ...query,
+    page: nextPage,
+  };
+
+  const previousQuery = {
+    ...query,
+    page: previousPage,
+  };
+
+  const pageLinks = {
+    currentPage,
+    next: '/posts?' + querystring.stringify(nextQuery),
+  };
+
+  if (currentPage > 1) {
+    pageLinks.previous = '/posts?page=' + querystring.stringify(previousQuery);
+  }
+
+  return pageLinks;
 };
 
 module.exports = {
@@ -30,33 +58,34 @@ module.exports = {
   },
 
   fn: async function (inputs, exits) {
-    let posts = [];
+    const pageLinks = _getPageLinks(this.req.query);
+    let findOptions = {};
 
-    if (this.req && this.req.query && this.req.query.order_by === 'popular') {
-      posts = await Post
-        .find({
-          where: {
-            and: [
-              {social: {'!=': null}},
-              {publishedAt: {'>': moment().subtract(48, 'h').toISOString()}},
-              {publishedAt: {'<': moment().subtract(24, 'h').toISOString()}},
-            ]
-          },
-          sort: 'social.24.facebook.total_count DESC'
-        })
-        .meta({enableExperimentalDeepTargets: true})
-        .paginate(1, PER_PAGE);
+    if (this.req.query && this.req.query.order_by === 'popular') {
+      findOptions = {
+        where: {
+          and: [
+            {social: {'!=': null}},
+            {publishedAt: {'>': moment().subtract(48, 'h').toISOString()}},
+            {publishedAt: {'<': moment().subtract(24, 'h').toISOString()}},
+          ]
+        },
+        sort: 'social.24.facebook.total_count DESC'
+      };
     } else {
-      posts = await Post
-        .find({
-          sort: 'publishedAt DESC'
-        })
-        .paginate(1, PER_PAGE);
+      findOptions = {
+        sort: 'publishedAt DESC'
+      };
     }
+
+    let posts = await Post
+      .find(findOptions)
+      .meta({enableExperimentalDeepTargets: true})
+      .paginate(pageLinks.currentPage, PER_PAGE);
 
     posts = await _joinSourcesToPosts(posts);
 
-    return exits.success({posts, moment});
+    return exits.success({posts, moment, pageLinks});
 
   },
 
