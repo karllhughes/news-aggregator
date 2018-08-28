@@ -7,6 +7,7 @@ services:
     - "1337:1337"
     volumes:
     - ./:/app
+    command: node node_modules/.bin/nodemon ./app.js 0.0.0.0 1337
   mongo:
     image: mongo:4.0
     volumes:

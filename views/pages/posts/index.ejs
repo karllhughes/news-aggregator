@@ -1,0 +1,37 @@
+<div id="posts">
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <h1>Posts</h1>
+        <hr/>
+        <p>This page lists posts.</p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <% for (let i=0; i<posts.length; i++) {%>
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">
+                <a href="<%= posts[i].url %>">
+                <%= posts[i].title %>
+                </a>
+              </h5>
+              <p class="card-text">
+                <% if (posts[i].imageUrl) { %>
+                  <a href="<%= posts[i].url %>">
+                    <img class="float-left mr-3" style="max-width: 200px; height: auto;" src="<%= posts[i].imageUrl %>">
+                  </a>
+                <% } %>
+                <%= posts[i].summary %>
+              </p>
+            </div>
+          </div>
+        <% } %>
+      </div>
+    </div>
+
+  </div>
+</div>
+<%- /* Expose locals as `window.SAILS_LOCALS` :: */ exposeLocalsToBrowser() %>

@@ -17,7 +17,7 @@ module.exports = {
 
     redirect: {
       responseType: 'redirect',
-      description: 'Requesting user is logged in, so redirect to the internal welcome page.'
+      description: 'Requesting user is logged in, so redirect to the posts page.'
     },
 
   },
@@ -26,7 +26,7 @@ module.exports = {
   fn: async function (inputs, exits) {
 
     if (this.req.me) {
-      throw {redirect:'/welcome'};
+      throw {redirect:'/posts'};
     }
 
     return exits.success();

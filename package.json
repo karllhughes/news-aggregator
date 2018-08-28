@@ -27,6 +27,7 @@
     "@sailshq/htmlhint": "^0.9.16",
     "@sailshq/lesshint": "^4.6.6",
     "grunt": "1.0.1",
+    "nodemon": "^1.18.3",
     "sails-hook-grunt": "^3.0.2"
   },
   "scripts": {
@@ -48,5 +49,8 @@
   "license": "",
   "engines": {
     "node": ">=9.11"
+  },
+  "nodemonConfig": {
+    "ignore": [".tmp/*", "extras/*", ".idea/*"]
   }
 }
