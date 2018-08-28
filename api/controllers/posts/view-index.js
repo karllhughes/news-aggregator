@@ -2,14 +2,23 @@ const moment = require('moment');
 
 const PER_PAGE = 25;
 
-module.exports = {
+const _joinSourcesToPosts = async (posts) => {
+  const feedIds = posts.map(post => post.feedbinFeedId);
 
+  const sources = await Source.find({ where: { feedbinFeedId: { 'in': feedIds } } });
+
+  return posts.map(post => {
+    post.source = sources.find(source => source.feedbinFeedId === post.feedbinFeedId);
+
+    return post;
+  });
+};
+
+module.exports = {
 
   friendlyName: 'View posts page',
 
-
   description: 'Display the dashboard "Posts" page.',
-
 
   exits: {
 
@@ -20,7 +29,6 @@ module.exports = {
 
   },
 
-
   fn: async function (inputs, exits) {
     let posts = [];
 
@@ -30,8 +38,8 @@ module.exports = {
           where: {
             and: [
               {social: {'!=': null}},
-              {publishedAt: {'>': moment().subtract(24, 'h').toISOString()}},
-              {publishedAt: {'<': moment().subtract(24 - 1, 'h').toISOString()}},
+              {publishedAt: {'>': moment().subtract(48, 'h').toISOString()}},
+              {publishedAt: {'<': moment().subtract(24, 'h').toISOString()}},
             ]
           },
           sort: 'social.24.facebook.total_count DESC'
@@ -46,10 +54,10 @@ module.exports = {
         .paginate(1, PER_PAGE);
     }
 
+    posts = await _joinSourcesToPosts(posts);
 
-    return exits.success({posts});
+    return exits.success({posts, moment});
 
-  }
-
+  },
 
 };
