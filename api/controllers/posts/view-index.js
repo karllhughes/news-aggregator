@@ -26,7 +26,7 @@ module.exports = {
         where: {
           and: [
             {social: {'!=': null}},
-            {publishedAt: {'>': moment().subtract(48, 'h').toISOString()}},
+            {publishedAt: {'>': moment().subtract(72, 'h').toISOString()}},
           ]
         },
         sort: 'social.24.facebook.total_count DESC'

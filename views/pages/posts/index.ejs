@@ -44,6 +44,9 @@
                 <div class="col-sm-4">
                   <% if (posts[i].source) { %>
                     <a href="<%= posts[i].source.siteUrl %>" target="_blank">
+                      <% if (posts[i].source.logo && posts[i].source.logo.url) { %>
+                        <img class="float-left mr-1" style="max-width: 24px; height: auto;" src="<%= posts[i].source.logo.url %>">
+                      <% } %>
                       <%= posts[i].source.title %>
                     </a>
                   <% } %>
