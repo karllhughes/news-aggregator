@@ -15,24 +15,16 @@ db.getCollection('post').find(
 
 // Most popular posts in past 48 hours
 db.post.aggregate([
-  {
-    $match: {
-      $and: [
-        {social: {$ne: null}},
-        {publishedAt: {$gt: (new Date(new Date().getTime() - (48 * 60 * 60 * 1000))).toISOString()}},
-      ]
-    }
-  },
-  {
-    $project: {
+  {$match: {$and: [
+    {social: {$ne: null}},
+    {publishedAt: {$gt: (new Date(new Date().getTime() - (48 * 60 * 60 * 1000))).toISOString()}},
+  ]}},
+  {$project: {
       title: 1,
       summary: 1,
       url: 1,
       publishedAt: 1,
-      totalSocial: {
-        $add: ["$social.24.facebook.total_count", "$social.24.pinterest"],
-      }
-    }
-  },
+      totalSocial: {$add: ["$social.24.facebook.total_count", "$social.24.pinterest"]}
+  }},
   {$sort: {totalSocial: -1}}
 ]);
