@@ -63,7 +63,7 @@ hyper cron create --hour=* --minute=8 --env-file=.env --link=news-db --size s4 -
 Run a web instance (optional):
 
 ```bash
-hyper run -d --env-file=.env --link=news-db:news-db --size s4 --name news-app -p 80:80 karllhughes/news node app.js --prod
+hyper run -d --env-file=.env --restart=always --link=news-db:news-db --size s4 --name news-app -p 80:80 karllhughes/news node app.js --prod
 
 hyper fip attach <IP> news-app
 ```

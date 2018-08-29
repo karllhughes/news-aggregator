@@ -253,7 +253,7 @@ module.exports = {
     *                                                                          *
     ***************************************************************************/
     onlyAllowOrigins: [
-      'https://www.foredus.com',
+      'https://news.foredus.com',
     ],
 
 
@@ -323,7 +323,7 @@ module.exports = {
     * (https://sailsjs.com/config/http)                                        *
     *                                                                          *
     ***************************************************************************/
-    // trustProxy: true,
+    trustProxy: true,
 
   },
 
@@ -372,7 +372,7 @@ module.exports = {
   *                                                                         *
   ***************************************************************************/
   custom: {
-    //
+    baseUrl: 'https://news.foredus.com',
   },
 
   feedbin: {
