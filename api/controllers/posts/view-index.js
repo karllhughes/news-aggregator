@@ -2,18 +2,6 @@ const moment = require('moment');
 
 const PER_PAGE = 25;
 
-const _joinSourcesToPosts = async (posts) => {
-  const feedIds = posts.map(post => post.feedbinFeedId);
-
-  const sources = await Source.find({ where: { feedbinFeedId: { 'in': feedIds } } });
-
-  return posts.map(post => {
-    post.source = sources.find(source => source.feedbinFeedId === post.feedbinFeedId);
-
-    return post;
-  });
-};
-
 module.exports = {
 
   friendlyName: 'View posts page',
@@ -54,7 +42,7 @@ module.exports = {
       .meta({enableExperimentalDeepTargets: true})
       .paginate(pageLinks.currentPage, PER_PAGE);
 
-    posts = await _joinSourcesToPosts(posts);
+    posts = await Source.joinToPosts(posts);
 
     return exits.success({posts, moment, pageLinks});
 

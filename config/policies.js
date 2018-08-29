@@ -17,6 +17,7 @@ module.exports.policies = {
   'account/logout': true,
   'view-homepage-or-redirect': true,
   'deliver-contact-form-message': true,
+  'posts/*': true,
 
   // Allow Post API
   'PostController': {

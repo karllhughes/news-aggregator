@@ -78,5 +78,17 @@ module.exports = {
 
   },
 
+  joinToPosts: async (posts) => {
+    const feedIds = posts.map(post => post.feedbinFeedId);
+
+    const sources = await Source.find({ where: { feedbinFeedId: { 'in': feedIds } } });
+
+    return posts.map(post => {
+      post.source = sources.find(source => source.feedbinFeedId === post.feedbinFeedId);
+
+      return post;
+    });
+  },
+
 };
 
