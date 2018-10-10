@@ -49,7 +49,7 @@ module.exports.datastores = {
     *                                                                          *
     ***************************************************************************/
     adapter: 'sails-mongo',
-    url: 'mongodb://root:root@mongo:27017/admin',
+    url: process.env.MONGO_CONNECTION_STRING || 'mongodb://root:root@mongo:27017/admin',
 
   },
 

@@ -9,7 +9,7 @@
     "@sailshq/lodash": "^3.10.3",
     "@sailshq/socket.io-redis": "^5.2.0",
     "async": "2.0.1",
-    "feedbin-nodejs": "git://github.com/mariosant/feedbin-nodejs.git#1d8f2e73",
+    "feedbin-nodejs": "git://github.com/karllhughes/feedbin-nodejs.git",
     "letter-count": "^2.8.9",
     "moment": "^2.22.2",
     "natural": "^0.6.1",
@@ -18,7 +18,7 @@
     "sails-hook-apianalytics": "^2.0.0",
     "sails-hook-organics": "^0.13.0",
     "sails-hook-orm": "^2.0.0-16",
-    "sails-hook-sockets": "^1.4.0",
+    "sails-hook-sockets": "^1.5.5",
     "sails-mongo": "^1.0.1",
     "unfluff": "^3.2.0"
   },
@@ -27,13 +27,13 @@
     "@sailshq/htmlhint": "^0.9.16",
     "@sailshq/lesshint": "^4.6.6",
     "grunt": "1.0.1",
-    "nodemon": "^1.18.3",
+    "nodemon": "^1.18.4",
     "sails-hook-grunt": "^3.0.2"
   },
   "scripts": {
     "start": "NODE_ENV=production node app.js",
     "lint": "eslint . --max-warnings=0 --report-unused-disable-directives && echo '✔  Your .js files look so good.' && htmlhint -c ./.htmlhintrc views/*.ejs && htmlhint -c ./.htmlhintrc views/**/*.ejs && htmlhint -c ./.htmlhintrc views/**/**/*.ejs && htmlhint -c ./.htmlhintrc views/**/**/**/*.ejs && htmlhint -c ./.htmlhintrc views/**/**/**/**/*.ejs && htmlhint -c ./.htmlhintrc views/**/**/**/**/**/*.ejs && htmlhint -c ./.htmlhintrc views/**/**/**/**/**/**/*.ejs && echo '✔  So do your .ejs files.' && lesshint assets/styles/ --max-warnings=0 && echo '✔  Your .less files look good, too.'",
-    "app:up": "docker-compose up -d",
+    "app:up": "docker-compose up",
     "app:down": "docker-compose down",
     "app:build": "docker build -t karllhughes/news .",
     "app:deploy": "docker push karllhughes/news && hyper pull karllhughes/news",
@@ -51,6 +51,10 @@
     "node": ">=9.11"
   },
   "nodemonConfig": {
-    "ignore": [".tmp/*", "extras/*", ".idea/*"]
+    "ignore": [
+      ".tmp/*",
+      "extras/*",
+      ".idea/*"
+    ]
   }
 }
