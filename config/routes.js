@@ -44,6 +44,9 @@ module.exports.routes = {
   'POST  /api/v1/entrance/update-password-and-login': {action: 'entrance/update-password-and-login'},
   'GET /api/popular-posts': {action: 'posts/json-popular'},
 
+  // RSS
+  'GET /rss/popular-posts': {action: 'posts/rss-popular'},
+
 
   //  ╦ ╦╔═╗╔╗ ╦ ╦╔═╗╔═╗╦╔═╔═╗
   //  ║║║║╣ ╠╩╗╠═╣║ ║║ ║╠╩╗╚═╗

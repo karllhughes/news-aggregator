@@ -5,6 +5,8 @@ services:
     image: karllhughes/news:latest
     ports:
     - "1337:1337"
+    env_file:
+    - ./.env.local
     volumes:
     - ./:/app
     command: node node_modules/.bin/nodemon ./app.js 0.0.0.0 1337

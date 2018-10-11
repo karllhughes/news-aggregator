@@ -53,7 +53,7 @@ module.exports.models = {
   *                                                                          *
   ***************************************************************************/
 
-  migrate: process.env.MONGO_CONNECTION_STRING ? 'safe' : 'alter',
+  migrate: process.env.MONGO_CONNECTION_URL ? 'safe' : 'alter',
 
 
   /***************************************************************************
