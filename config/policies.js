@@ -15,7 +15,7 @@ module.exports.policies = {
   // Bypass the `is-logged-in` policy for:
   'entrance/*': true,
   'account/logout': true,
-  'posts/view-api': true,
+  'posts/*': true,
   // 'posts/*': true,
 
   // Allow Post API

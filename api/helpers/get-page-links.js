@@ -1,22 +1,14 @@
 const querystring = require('querystring');
 
 module.exports = {
-
-  friendlyName: 'Get page links',
-
-  description: 'Get pagination links (next, previous) from the request object\'s query object',
-
   sync: true,
-
   inputs: {
     query: {
       description: 'The request query object.',
-      example: {page: 1, order_by: 'popular'},
-      type: {},
+      type: 'ref',
       defaultsTo: {},
     },
   },
-
   exits: {
     success: {
       outputFriendlyName: 'pageLinks',
@@ -27,8 +19,6 @@ module.exports = {
       }
     }
   },
-
-
   fn: function(inputs, exits) {
     const currentPage = inputs.query.page ? Number(inputs.query.page) : 1;
     const nextPage = currentPage + 1;
@@ -55,5 +45,4 @@ module.exports = {
 
     return exits.success(pageLinks);
   }
-
 };

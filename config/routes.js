@@ -15,7 +15,7 @@ module.exports.routes = {
   //  ║║║║╣ ╠╩╗╠═╝╠═╣║ ╦║╣ ╚═╗
   //  ╚╩╝╚═╝╚═╝╩  ╩ ╩╚═╝╚═╝╚═╝
   'GET /': '/posts',
-  'GET /posts': {action: 'posts/view-index'},
+  'GET /popular-posts': {action: 'posts/html-popular'},
 
   'GET /signup': {action: 'entrance/view-signup'},
   'GET /email/confirm': {action: 'entrance/confirm-email'},
@@ -42,7 +42,7 @@ module.exports.routes = {
   'POST  /api/v1/entrance/signup': {action: 'entrance/signup'},
   'POST  /api/v1/entrance/send-password-recovery-email': {action: 'entrance/send-password-recovery-email'},
   'POST  /api/v1/entrance/update-password-and-login': {action: 'entrance/update-password-and-login'},
-  'GET /api/posts': {action: 'posts/view-api'},
+  'GET /api/popular-posts': {action: 'posts/json-popular'},
 
 
   //  ╦ ╦╔═╗╔╗ ╦ ╦╔═╗╔═╗╦╔═╔═╗
