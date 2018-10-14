@@ -253,7 +253,7 @@ module.exports = {
     *                                                                          *
     ***************************************************************************/
     onlyAllowOrigins: [
-      'https://news.foredus.com',
+      'https://www.foredus.com',
     ],
 
 
@@ -372,7 +372,7 @@ module.exports = {
   *                                                                         *
   ***************************************************************************/
   custom: {
-    baseUrl: 'https://news.foredus.com',
+    baseUrl: 'https://www.foredus.com',
   },
 
   feedbin: {
