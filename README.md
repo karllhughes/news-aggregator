@@ -37,7 +37,7 @@ npm run app:build && npm run app:deploy
 Run the collector(s):
 
 ```bash
-hyper run --rm --env-file=.env --link=news-db --size m1 karllhughes/news node node_modules/.bin/sails run <COLLECTOR_NAME>
+hyper run --rm --env-file=.env --link=news-db --size s4 karllhughes/news node node_modules/.bin/sails run <COLLECTOR_NAME>
 ```
 
 Set up Hyper.sh cron jobs to automatically run the collectors:
