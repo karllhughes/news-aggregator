@@ -109,6 +109,16 @@ module.exports = {
       required: false,
     },
 
+    characterCount: {
+      type: 'number',
+      required: false,
+    },
+
+    wordCount: {
+      type: 'number',
+      required: false,
+    },
+
     //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗
     //  ║╣ ║║║╠╩╗║╣  ║║╚═╗
     //  ╚═╝╩ ╩╚═╝╚═╝═╩╝╚═╝
