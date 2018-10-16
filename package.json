@@ -38,12 +38,11 @@
     "app:down": "docker-compose down",
     "app:build": "docker build -t karllhughes/news .",
     "app:deploy": "docker push karllhughes/news && hyper pull karllhughes/news",
-    "sources:collect": "docker exec -it news_app_1 node node_modules/.bin/sails run collect-sources",
-    "sources:metadata": "docker exec -it news_app_1 node node_modules/.bin/sails run collect-metadata-for-sources",
-    "posts:collect": "docker exec -it news_app_1 node node_modules/.bin/sails run collect-posts",
-    "posts:unfluff": "docker exec -it news_app_1 node node_modules/.bin/sails run unfluff-posts",
-    "posts:social": "docker exec -it news_app_1 node node_modules/.bin/sails run shared-count-posts",
-    "posts:process": "docker exec -it news_app_1 node node_modules/.bin/sails run process-posts-text"
+    "sync-sources-with-feedbin": "docker exec -it news_app_1 node node_modules/.bin/sails run sync-sources-with-feedbin",
+    "add-source-metadata": "docker exec -it news_app_1 node node_modules/.bin/sails run add-source-metadata",
+    "get-new-posts-from-feedbin": "docker exec -it news_app_1 node node_modules/.bin/sails run get-new-posts-from-feedbin",
+    "add-post-text": "docker exec -it news_app_1 node node_modules/.bin/sails run add-post-text",
+    "add-post-social": "docker exec -it news_app_1 node node_modules/.bin/sails run add-post-social"
   },
   "main": "app.js",
   "author": "karl",

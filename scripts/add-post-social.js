@@ -1,4 +1,4 @@
-const collectPostSocial = require('../api/controllers/collectors/collect-post-social');
+const addPostSocial = require('../api/controllers/cli-scripts/add-post-social');
 
 module.exports = {
 
@@ -11,12 +11,12 @@ module.exports = {
   },
 
   fn: async function (inputs, exits) {
-    sails.log(`Getting "shared counts" for posts ${inputs.hoursBack} hours old`);
+    sails.log(`Getting "add-post-social" for posts ${inputs.hoursBack} hours old`);
 
     try {
-      const results = await collectPostSocial(inputs.hoursBack);
+      const results = await addPostSocial(inputs.hoursBack);
 
-      return exits.success(`${results.length} posts updated.`);
+      return exits.success(`Processed ${results.length} posts.`);
     } catch (e) {
       return exits.error(e);
     }
