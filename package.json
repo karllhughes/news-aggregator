@@ -42,6 +42,7 @@
     "add-source-metadata": "docker exec -it news_app_1 node node_modules/.bin/sails run add-source-metadata",
     "get-new-posts-from-feedbin": "docker exec -it news_app_1 node node_modules/.bin/sails run get-new-posts-from-feedbin",
     "add-post-text": "docker exec -it news_app_1 node node_modules/.bin/sails run add-post-text",
+    "add-post-keywords": "docker exec -it news_app_1 node node_modules/.bin/sails run add-post-keywords",
     "add-post-social": "docker exec -it news_app_1 node node_modules/.bin/sails run add-post-social"
   },
   "main": "app.js",
