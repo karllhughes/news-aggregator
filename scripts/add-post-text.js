@@ -2,6 +2,8 @@ const addPostText = require('../api/controllers/cli-scripts/add-post-text');
 
 module.exports = {
 
+  friendlyName: 'add-post-text',
+
   description: 'Collects post text, image, tags, and embedded links using unfluff. Also adds text length metadata.',
 
   inputs: {},

@@ -2,6 +2,8 @@ const getNewPostsFromFeedbin = require('../api/controllers/cli-scripts/get-new-p
 
 module.exports = {
 
+  friendlyName: 'get-new-posts-from-feedbin',
+
   description: 'Gets posts from Feedbin, stores new ones in the database',
 
   inputs: {},

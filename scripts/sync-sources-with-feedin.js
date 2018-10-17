@@ -1,6 +1,9 @@
 const syncSourcesWithFeedin = require('../api/controllers/cli-scripts/sync-sources-with-feedbin');
 
 module.exports = {
+
+  friendlyName: 'sync-sources-with-feedbin',
+
   description: 'Syncs source data with that stored in Feedbin',
 
   inputs: {},

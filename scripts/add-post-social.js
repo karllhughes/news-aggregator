@@ -2,7 +2,7 @@ const addPostSocial = require('../api/controllers/cli-scripts/add-post-social');
 
 module.exports = {
 
-  friendlyName: 'Get shared count for posts',
+  friendlyName: 'add-post-social',
 
   description: 'Collects shares on LinkedIn, Facebook, and Pinterest',
 

@@ -2,6 +2,8 @@ const addPostKeywords = require('../api/controllers/cli-scripts/add-post-keyword
 
 module.exports = {
 
+  friendlyName: 'add-post-keywords',
+
   description: 'Use the text of the post to extract keywords.',
 
   inputs: {},

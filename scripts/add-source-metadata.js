@@ -2,6 +2,8 @@ const addSourceMetadata = require('../api/controllers/cli-scripts/add-source-met
 
 module.exports = {
 
+  friendlyName: 'add-source-metadata',
+
   description: 'Collects metadata (logo, image, description) for each source',
 
   inputs: {},

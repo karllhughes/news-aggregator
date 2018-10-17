@@ -11,12 +11,12 @@ News and blog data aggregator. Uses Feedbin, SharedCount, and open source natura
 
 ### Command-line scripts
 
-- `npm run sync-sources-with-feedin` Sync sources from Feedbin with the application database.
-- `npm run add-source-metadata` Gets extra metadata about sources (eg: image, favicon, description).
-- `npm run get-new-posts-from-feedbint` Get the latest posts from Feedbin and save to the application database.
-- `npm run add-post-text` Get the full text, image, tags, and links using [Node Unfluff](https://github.com/ageitgey/node-unfluff). Also adds some text length metadata.
-- `npm run add-post-keywords` Use the text of the post to extract keywords. Uses [Node Natural](https://github.com/NaturalNode/natural) for NLP tasks.
-- `npm run add-post-social` Get social share counts from [SharedCount](https://www.sharedcount.com/).
+- `npm run app:sync-sources-with-feedin` Sync sources from Feedbin with the application database.
+- `npm run app:add-source-metadata` Gets extra metadata about sources (eg: image, favicon, description).
+- `npm run app:get-new-posts-from-feedbint` Get the latest posts from Feedbin and save to the application database.
+- `npm run app:add-post-text` Get the full text, image, tags, and links using [Node Unfluff](https://github.com/ageitgey/node-unfluff). Also adds some text length metadata.
+- `npm run app:add-post-keywords` Use the text of the post to extract keywords. Uses [Node Natural](https://github.com/NaturalNode/natural) for NLP tasks.
+- `npm run app:add-post-social` Get social share counts from [SharedCount](https://www.sharedcount.com/).
 
 
 ## Deploying to Hyper.sh

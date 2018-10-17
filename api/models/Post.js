@@ -93,22 +93,6 @@ module.exports = {
       required: false,
     },
 
-    textProcessedAt: {
-      type: 'ref',
-      columnType: 'datetime',
-      required: false,
-    },
-
-    textMeta: {
-      type: 'json',
-      required: false,
-    },
-
-    keywords: {
-      type: 'json',
-      required: false,
-    },
-
     characterCount: {
       type: 'number',
       required: false,
@@ -116,6 +100,17 @@ module.exports = {
 
     wordCount: {
       type: 'number',
+      required: false,
+    },
+
+    keywordsAddedAt: {
+      type: 'ref',
+      columnType: 'datetime',
+      required: false,
+    },
+
+    keywords: {
+      type: 'json',
       required: false,
     },
 

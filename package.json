@@ -38,12 +38,12 @@
     "app:down": "docker-compose down",
     "app:build": "docker build -t karllhughes/news .",
     "app:deploy": "docker push karllhughes/news && hyper pull karllhughes/news",
-    "sync-sources-with-feedbin": "docker exec -it news_app_1 node node_modules/.bin/sails run sync-sources-with-feedbin",
-    "add-source-metadata": "docker exec -it news_app_1 node node_modules/.bin/sails run add-source-metadata",
-    "get-new-posts-from-feedbin": "docker exec -it news_app_1 node node_modules/.bin/sails run get-new-posts-from-feedbin",
-    "add-post-text": "docker exec -it news_app_1 node node_modules/.bin/sails run add-post-text",
-    "add-post-keywords": "docker exec -it news_app_1 node node_modules/.bin/sails run add-post-keywords",
-    "add-post-social": "docker exec -it news_app_1 node node_modules/.bin/sails run add-post-social"
+    "app:sync-sources-with-feedbin": "docker exec -it news_app_1 node node_modules/.bin/sails run sync-sources-with-feedbin",
+    "app:add-source-metadata": "docker exec -it news_app_1 node node_modules/.bin/sails run add-source-metadata",
+    "app:get-new-posts-from-feedbin": "docker exec -it news_app_1 node node_modules/.bin/sails run get-new-posts-from-feedbin",
+    "app:add-post-text": "docker exec -it news_app_1 node node_modules/.bin/sails run add-post-text",
+    "app:add-post-keywords": "docker exec -it news_app_1 node node_modules/.bin/sails run add-post-keywords",
+    "app:add-post-social": "docker exec -it news_app_1 node node_modules/.bin/sails run add-post-social"
   },
   "main": "app.js",
   "author": "karl",
