@@ -1,4 +1,4 @@
-const syncSourcesWithFeedin = require('../api/controllers/cli-scripts/sync-sources-with-feedbin');
+const syncSourcesWithFeedbin = require('../api/controllers/cli-scripts/sync-sources-with-feedbin');
 
 module.exports = {
 
@@ -13,7 +13,7 @@ module.exports = {
     sails.log('Starting "sync-sources-with-feedbin" script');
 
     try {
-      const results = await syncSourcesWithFeedin();
+      const results = await syncSourcesWithFeedbin();
 
       return exits.success(`${results.created} sources created, ${results.deleted} sources deleted.`);
     } catch (e) {

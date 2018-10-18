@@ -11,7 +11,7 @@ News and blog data aggregator. Uses Feedbin, SharedCount, and open source natura
 
 ### Command-line scripts
 
-- `npm run app:sync-sources-with-feedin` Sync sources from Feedbin with the application database.
+- `npm run app:sync-sources-with-feedbin` Sync sources from Feedbin with the application database.
 - `npm run app:add-source-metadata` Gets extra metadata about sources (eg: image, favicon, description).
 - `npm run app:get-new-posts-from-feedbint` Get the latest posts from Feedbin and save to the application database.
 - `npm run app:add-post-text` Get the full text, image, tags, and links using [Node Unfluff](https://github.com/ageitgey/node-unfluff). Also adds some text length metadata.
@@ -45,7 +45,7 @@ Set up Hyper.sh cron jobs to automatically run the collectors:
 
 ```bash
 # Run source collector every 4 hours
-hyper cron create --hour=*/4 --minute=0 --env-file=.env --link=news-db --size s4 --name news-sources-cron karllhughes/news node node_modules/.bin/sails run sync-sources-with-feedin
+hyper cron create --hour=*/4 --minute=0 --env-file=.env --link=news-db --size s4 --name news-sources-cron karllhughes/news node node_modules/.bin/sails run sync-sources-with-feedbin
 
 # Run source meta collector every 4 hours
 hyper cron create --hour=*/4 --minute=6 --env-file=.env --link=news-db --size s4 --name news-source-meta-cron karllhughes/news node node_modules/.bin/sails run add-source-metadata
