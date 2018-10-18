@@ -93,6 +93,12 @@ module.exports = {
       required: false,
     },
 
+    socialUpdatedAt: {
+      type: 'ref',
+      columnType: 'datetime',
+      required: false,
+    },
+
     characterCount: {
       type: 'number',
       required: false,

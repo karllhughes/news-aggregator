@@ -13,7 +13,7 @@ News and blog data aggregator. Uses Feedbin, SharedCount, and open source natura
 
 - `npm run app:sync-sources-with-feedbin` Sync sources from Feedbin with the application database.
 - `npm run app:add-source-metadata` Gets extra metadata about sources (eg: image, favicon, description).
-- `npm run app:get-new-posts-from-feedbint` Get the latest posts from Feedbin and save to the application database.
+- `npm run app:get-new-posts-from-feedbin` Get the latest posts from Feedbin and save to the application database.
 - `npm run app:add-post-text` Get the full text, image, tags, and links using [Node Unfluff](https://github.com/ageitgey/node-unfluff). Also adds some text length metadata.
 - `npm run app:add-post-keywords` Use the text of the post to extract keywords. Uses [Node Natural](https://github.com/NaturalNode/natural) for NLP tasks.
 - `npm run app:add-post-social` Get social share counts from [SharedCount](https://www.sharedcount.com/).
@@ -57,7 +57,7 @@ hyper cron create --hour=* --minute=2 --env-file=.env --link=news-db --size s4 -
 hyper cron create --hour=* --minute=4 --env-file=.env --link=news-db --size s4 --name news-posts-unfluff-cron karllhughes/news node node_modules/.bin/sails run add-post-text
 
 # Run post keyword extraction every 1 hour
-hyper cron create --hour=* --minute=8 --env-file=.env --link=news-db --size s4 --name news-posts-unfluff-cron karllhughes/news node node_modules/.bin/sails run add-post-text
+hyper cron create --hour=* --minute=8 --env-file=.env --link=news-db --size s4 --name news-posts-keywords-cron karllhughes/news node node_modules/.bin/sails run add-post-keywords
 
 # Run share counters every 1 hour
 hyper cron create --hour=* --minute=10 --env-file=.env --link=news-db --size s4 --name news-posts-social-24-cron karllhughes/news node node_modules/.bin/sails run add-post-social --hoursBack=24
