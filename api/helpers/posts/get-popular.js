@@ -28,7 +28,7 @@ module.exports = {
         },
       ]
     })
-    .sort({'social.24.facebook.total_count': -1})
+    .sort({'social.facebook': -1})
     .skip(
       inputs.options.pageLinks.currentPage > 1 ?
       ((inputs.options.pageLinks.currentPage - 1) * inputs.options.perPage) :

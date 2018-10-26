@@ -44,15 +44,15 @@
                 <div class="col-sm-4 text-md-right">
                   <button type="button" class="btn btn-sm btn-primary">
                     Facebook <span class="badge badge-light">
-                      <% if (posts[i].social && posts[i].social['24']) { %>
-                        <%= posts[i].social['24'].facebook.total_count %>
+                      <% if (posts[i].social) { %>
+                        <%= posts[i].social.facebook %>
                       <% } else { %>0<% } %>
                     </span>
                   </button>
                   <button type="button" class="btn btn-sm btn-danger">
                     Pinterest <span class="badge badge-light">
-                      <% if (posts[i].social && posts[i].social['24']) { %>
-                        <%= posts[i].social['24'].pinterest %>
+                      <% if (posts[i].social) { %>
+                        <%= posts[i].social.pinterest %>
                       <% } else { %>0<% } %>
                     </span>
                   </button>
