@@ -42,6 +42,7 @@ module.exports = async (hoursBack) => {
 
     // Save the results
     try {
+      updatedPost.social.total = Object.values(updatedPost.social).reduce((a, b) => a + b, 0);
       return Post.update({id: post.id}, updatedPost);
     } catch (e) {
       sails.log.error(e);
