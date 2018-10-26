@@ -1,22 +1,76 @@
-<div id="posts">
+<div class="jumbotron mb-4 text-center">
   <div class="container">
-    <div class="row">
-      <div class="col mb-3">
-        <h1 class="text-center">Foredus</h1>
-        <h4 class="text-center">The Web's Best Education News</h4>
+    <div class="row mb-3 mt-3">
+      <div class="col-md-6 offset-md-3">
+        <h1 class="display-3">Foredus</h1>
+        <p class="lead mb-5">The Web's Best Education News.</p>
       </div>
     </div>
 
+    <div id="home-signup" class="row mb-3 mt-3">
+      <div class="col-md-6 offset-md-3">
+        <p class="text-left">Sign up to receive our <strong>weekly email of the most important and impactful education news</strong> gathered from across the web.</p>
+        <form action="https://karllhughes.us15.list-manage.com/subscribe/post?u=4eba8b205fc13380cd3e6f3fc&amp;id=a20d14cf2b" class="text-left" method="post" target="_blank">
+          <div class="form-group">
+            <label for="mce-EMAIL" style="display: none;">Email Address</label>
+            <input type="email" placeholder="Enter your email address" class="form-control" required="required" name="EMAIL" id="mce-EMAIL">
+          </div>
+          <button type="submit" class="btn btn-primary btn-block"><i class="fa fa-envelope-o"></i> Subscribe</button>
+          <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_97f1bc02efa56031b67a2b00f_fc7b4ce646" tabindex="-1" value=""></div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="posts">
+  <div class="container">
+    <% if (counts) { %>
+      <div id="weekly-data" class="row mb-5">
+        <div class="col-md-8 offset-md-2">
+          <h2 class="mb-3 text-center">Weekly Data</h2>
+          <div class="row">
+            <div class="col">
+              <div class="card text-center">
+                <div class="card-header"><i class="fa fa-newspaper-o"></i> Posts</div>
+                <div class="card-body">
+                  <p class="card-text"><%= counts.posts %></p>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="card text-center">
+                <div class="card-header"><i class="fa fa-building"></i> Sources</div>
+                <div class="card-body">
+                  <p class="card-text"><%= counts.sources %></p>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="card text-center">
+                <div class="card-header"><i class="fa fa-thumbs-up"></i> Shares</div>
+                <div class="card-body">
+                  <p class="card-text"><%= counts.social %></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% } %>
+
     <div class="row">
-      <div class="col">
+      <div class="col-md-8 offset-md-2">
+        <h3 class="mb-3 text-center">Today's Most Popular Posts</h3>
+
         <% for (let i=0; i<posts.length; i++) {%>
           <div class="card mb-3">
             <div class="card-body">
-              <h5 class="card-title">
+              <h4 class="card-title">
                 <a href="<%= posts[i].url %>" target="_blank">
                 <%= posts[i].title %>
                 </a>
-              </h5>
+              </h4>
               <p class="card-text">
                 <% if (posts[i].imageUrl !== undefined) { %>
                   <a href="<%= posts[i].url %>" target="_blank">
@@ -28,34 +82,18 @@
             </div>
             <div class="card-footer text-center">
               <div class="row">
-                <div class="col-sm-4 text-md-left">
+                <div class="col-md-6 text-md-left">
                   <%= moment(posts[i].publishedAt).format('LLL') %>
                 </div>
-                <div class="col-sm-4">
+                <div class="col-md-6 text-md-right">
                   <% if (posts[i].source) { %>
                     <a href="<%= posts[i].source.siteUrl %>" target="_blank">
-                      <% if (posts[i].source.logo && posts[i].source.logo.url) { %>
-                        <img class="float-left mr-1" style="max-width: 24px; height: auto;" src="<%= posts[i].source.logo.url %>">
-                      <% } %>
                       <%= posts[i].source.title %>
+                      <% if (posts[i].source.logo && posts[i].source.logo.url) { %>
+                        <img class="float-right ml-2" style="max-width: 24px; height: auto;" src="<%= posts[i].source.logo.url %>">
+                      <% } %>
                     </a>
                   <% } %>
-                </div>
-                <div class="col-sm-4 text-md-right">
-                  <button type="button" class="btn btn-sm btn-primary">
-                    Facebook <span class="badge badge-light">
-                      <% if (posts[i].social) { %>
-                        <%= posts[i].social.facebook %>
-                      <% } else { %>0<% } %>
-                    </span>
-                  </button>
-                  <button type="button" class="btn btn-sm btn-danger">
-                    Pinterest <span class="badge badge-light">
-                      <% if (posts[i].social) { %>
-                        <%= posts[i].social.pinterest %>
-                      <% } else { %>0<% } %>
-                    </span>
-                  </button>
                 </div>
               </div>
             </div>
@@ -64,19 +102,13 @@
       </div>
     </div>
 
-    <div class="row">
-      <div class="col">
-        <nav aria-label="Page navigation example">
-          <ul class="pagination">
-            <% if (pageLinks.previous !== undefined) { %>
-            <li class="page-item"><a class="page-link" href="<%= pageLinks.previous %>">Prev</a></li>
-            <% } %>
-            <li class="page-item"><a class="page-link" href="<%= pageLinks.next %>">Next</a></li>
-          </ul>
-        </nav>
+    <div class="row mb-5">
+      <div class="col-md-8 offset-md-2">
+        <a href="#home-signup" class="btn btn-outline-primary btn-lg btn-block">
+          <i class="fa fa-envelope-o"></i> Subscribe for More
+        </a>
       </div>
     </div>
-
   </div>
 </div>
 <%- /* Expose locals as `window.SAILS_LOCALS` :: */ exposeLocalsToBrowser() %>

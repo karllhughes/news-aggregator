@@ -25,6 +25,7 @@
 
   <body>
     <div id="page-wrap">
+      <% if(typeof showNav !== "undefined") { %>
       <header id="page-header" class="navbar navbar-expand-sm navbar-dark bg-dark flex-column flex-md-row justify-content-between">
         <a class="navbar-brand mr-0" href="/">Foredus</a>
         <div class="navbar-nav flex-row">
@@ -53,6 +54,7 @@
           <% } %>
         </div>
       </header>
+      <% } %>
 
       <!-- Alert if email has not been confirmed -->
       <% if(me&&me.emailChangeCandidate) { %>
@@ -73,10 +75,10 @@
 
       <footer id="page-footer" class="navbar navbar-light justify-content-between flex-row-reverse">
         <div class="nav">
-          <small class="nav-item"><a class="nav-link text-info" href="#">Contact<span class="d-none d-sm-inline"> us</span></a></small>
-          <small class="nav-item"><a class="nav-link text-info" href="#">Terms<span class="d-none d-sm-inline"> of Use</span></a></small>
           <% if(me) { %>
-          <small class="nav-item"><a class="nav-link text-info" href="/logout">Sign out</a></small>
+            <small class="nav-item"><a class="nav-link text-info" href="/logout">Log out</a></small>
+          <% } else { %>
+            <small class="nav-item"><a class="nav-link text-info" href="/login">Log in</a></small>
           <% } %>
         </div>
         <small class="copy">Copyright &copy; 2018 Foredus. <br class="xs-only"/>All rights reserved.</small>

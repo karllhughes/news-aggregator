@@ -14,8 +14,7 @@ module.exports.routes = {
   //  ╦ ╦╔═╗╔╗ ╔═╗╔═╗╔═╗╔═╗╔═╗
   //  ║║║║╣ ╠╩╗╠═╝╠═╣║ ╦║╣ ╚═╗
   //  ╚╩╝╚═╝╚═╝╩  ╩ ╩╚═╝╚═╝╚═╝
-  'GET /': '/posts',
-  'GET /posts': {action: 'posts/html-popular'},
+  'GET /': {action: 'posts/html-popular'},
 
   'GET /signup': {action: 'entrance/view-signup'},
   'GET /email/confirm': {action: 'entrance/confirm-email'},
