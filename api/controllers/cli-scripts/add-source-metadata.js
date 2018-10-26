@@ -19,7 +19,7 @@ module.exports = async () => {
           {url: meta.data.image} : meta.data.image,
         }));
     } catch (e) {
-      console.error(e);
+      sails.log.error(e);
     }
   });
 

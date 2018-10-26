@@ -37,7 +37,7 @@ module.exports = async () => {
       try {
         return await Post.findOrCreate({feedbinId: post.feedbinId}, post);
       } catch (e) {
-        console.error(e);
+        sails.log.error(e);
       }
     });
 

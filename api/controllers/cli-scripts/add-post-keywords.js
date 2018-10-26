@@ -40,14 +40,14 @@ module.exports = async () => {
     try {
       updatedPost.keywords = getKeywordsFromText(post.text);
     } catch (e) {
-      console.error(e);
+      sails.log.error(e);
     }
 
     // Save the results
     try {
       return await Post.update({id: post.id}, updatedPost);
     } catch (e) {
-      console.error(e);
+      sails.log.error(e);
     }
   });
 

@@ -1,11 +1,12 @@
 const moment = require('moment');
 const sharedCountClient = require('../../api-clients/shared-count');
+const redditClient = require('../../api-clients/reddit');
+const twitterClient = require('../../api-clients/twitter');
 
 module.exports = async (hoursBack) => {
   const posts = await Post.find({
     where: {
       and: [
-        {socialUpdatedAt: null},
         {publishedAt: {'>': moment().subtract(hoursBack, 'h').toISOString()}},
         {publishedAt: {'<': moment().subtract(hoursBack - 1, 'h').toISOString()}},
       ],
@@ -18,17 +19,32 @@ module.exports = async (hoursBack) => {
   const updatedPosts = posts.map(async (post) => {
     const updatedPost = { socialUpdatedAt: new Date() };
 
+    // Facebook + Pinterest
     try {
       updatedPost.social = await sharedCountClient.getCounts(post.url);
     } catch (e) {
       sails.error(e);
     }
 
-    // Save the results
+    // Reddit
     try {
-      return await Post.update({id: post.id}, updatedPost);
+      updatedPost.social.reddit = await redditClient.getCounts(post.url);
     } catch (e) {
       sails.error(e);
+    }
+
+    // Twitter
+    try {
+      updatedPost.social.twitter = await twitterClient.getCounts(post.url);
+    } catch (e) {
+      sails.log.error(e);
+    }
+
+    // Save the results
+    try {
+      return Post.update({id: post.id}, updatedPost);
+    } catch (e) {
+      sails.log.error(e);
     }
   });
 
