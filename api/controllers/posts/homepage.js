@@ -25,10 +25,19 @@ module.exports = {
   description: 'HTML view of most popular posts within period',
   exits: {
     success: {
-      viewTemplatePath: 'pages/posts/index',
+      viewTemplatePath: 'pages/posts/homepage',
     },
+
+    redirect: {
+      description: 'The requesting user is already logged in.',
+      responseType: 'redirect'
+    }
   },
   fn: async function (inputs, exits) {
+    if (this.req.me) {
+      throw {redirect: '/dashboard'};
+    }
+
     let counts;
     const pageLinks = sails.helpers.getPageLinks(this.req.query);
     const maxHoursBack = sails.helpers.posts.getDaysBack(this.req.query) * 24;
