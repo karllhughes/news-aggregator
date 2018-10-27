@@ -36,6 +36,15 @@ module.exports = function(grunt) {
         dest: '.tmp/public/dist'
       }]
     },
+    fonts: {
+      files: [
+        {
+          expand: true,
+          flatten: true,
+          src: ['.tmp/public/bower_components/**/fonts/*',],
+          dest: '.tmp/public/fonts'
+        }]
+    },
   });
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

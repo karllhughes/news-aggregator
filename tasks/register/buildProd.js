@@ -19,6 +19,7 @@ module.exports = function(grunt) {
     'concat',
     'uglify',
     'cssmin',
+    'copy:fonts',
     'hash',//« Cache-busting
     'copy:beforeLinkBuildProd',//« For prettier URLs after cache-busting
     'linkAssetsBuildProd',
