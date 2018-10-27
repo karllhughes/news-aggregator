@@ -25,8 +25,8 @@
 
   <body>
     <div id="page-wrap">
-      <% if(typeof showNav !== "undefined") { %>
-      <header id="page-header" class="navbar navbar-expand-sm navbar-dark bg-dark flex-column flex-md-row justify-content-between">
+      <% if(typeof hideNav === "undefined") { %>
+      <header id="page-header" class="navbar navbar-expand-sm navbar-light bg-light flex-column flex-md-row justify-content-between">
         <a class="navbar-brand mr-0" href="/">Foredus</a>
         <div class="navbar-nav flex-row">
           <!-- LOGGED-IN NAVIGATION -->
@@ -47,7 +47,7 @@
           <a class="nav-item nav-link ml-2 ml-md-0 mr-2" href="/login">Log in</a>
           <!-- Only in desktop nav -->
           <div class="form-inline d-none ml-2 d-md-block" >
-            <a class="btn btn-outline-info" href="/signup">Sign up</a>
+            <a class="btn btn-outline-primary" href="/signup">Sign up</a>
           </div>
           <!-- Only in mobile nav -->
           <a class="nav-item nav-link text-info ml-2 d-block d-md-none" href="/signup">Sign up</a>
@@ -76,9 +76,9 @@
       <footer id="page-footer" class="navbar navbar-light justify-content-between flex-row-reverse">
         <div class="nav">
           <% if(me) { %>
-            <small class="nav-item"><a class="nav-link text-info" href="/logout">Log out</a></small>
+            <small class="nav-item"><a class="nav-link text-primary" href="/logout">Log out</a></small>
           <% } else { %>
-            <small class="nav-item"><a class="nav-link text-info" href="/login">Log in</a></small>
+            <small class="nav-item"><a class="nav-link text-primary" href="/login">Log in</a></small>
           <% } %>
         </div>
         <small class="copy">Copyright &copy; 2018 Foredus. <br class="xs-only"/>All rights reserved.</small>

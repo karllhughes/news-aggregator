@@ -32,7 +32,7 @@
         <p class="text-danger" v-if="cloudError==='emailAlreadyInUse'"><small>It looks like there's already an account with your email address. If you forgot your password, you can recover it <a href="password/forgot">here</a>.</small></p>
         <p class="text-danger" v-else-if="cloudError"><small>An error occured while processing your request. Please check your information and try again, or <a href="/support">contact support</a> if the error persists.</small></p>
         <div class="form-group">
-          <ajax-button type="submit" :syncing="syncing" class="btn-dark btn-lg btn-block">Create account</ajax-button>
+          <ajax-button type="submit" :syncing="syncing" class="btn-primary btn-lg btn-block">Create account</ajax-button>
         </div>
       </ajax-form>
       <p class="text-center">Have an account? <a href="/login">Sign in</a></p>
@@ -44,7 +44,7 @@
       <hr/>
       <p>Your account is nearly ready. All you have to do is click the link we sent to <strong>{{formData.emailAddress}}</strong>.</p>
       <p>(You can still access your dashboard now, but some features will be unvavailable until we've verified your email address.)</p>
-      <p><a class="btn btn-outline-info" href="/">Go to dashboard</a></p>
+      <p><a class="btn btn-outline-success" href="/dashboard">Go to dashboard</a></p>
     </div>
   </div>
 </div>

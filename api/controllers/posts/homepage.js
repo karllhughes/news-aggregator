@@ -59,6 +59,6 @@ module.exports = {
       sails.log.error(e);
     }
 
-    return exits.success({posts, moment, pageLinks, counts});
+    return exits.success({posts, moment, pageLinks, counts, hideNav: true});
   },
 };
