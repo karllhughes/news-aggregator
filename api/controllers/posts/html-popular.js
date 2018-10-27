@@ -1,5 +1,5 @@
 const moment = require('moment');
-const PER_PAGE = 20;
+const PER_PAGE = 10;
 
 function getPostCounts() {
   return Post.getDatastore().manager.collection('post').find({
