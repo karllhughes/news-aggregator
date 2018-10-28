@@ -186,5 +186,52 @@ module.exports = {
     return counts[0];
   },
 
+  getSocialCounts: async (hoursBack) => {
+    if (!hoursBack) {
+      hoursBack = 48;
+    }
+    const minTimestamp = moment.utc().subtract(hoursBack, 'h').toISOString();
+
+    const counts = (await Post.getDatastore().manager.collection('post').aggregate([
+      { "$facet": {
+          "total": [
+            { "$match" : {publishedAt: {$gt: minTimestamp}}},
+            { $group: {_id: null, total: {$sum: '$social.total'}}},
+          ],
+          "facebook": [
+            { "$match" : {publishedAt: {$gt: minTimestamp}}},
+            { $group: {_id: null, total: {$sum: '$social.facebook'}}},
+          ],
+          "twitter": [
+            { "$match" : {publishedAt: {$gt: minTimestamp}}},
+            { $group: {_id: null, total: {$sum: '$social.twitter'}}},
+          ],
+          "pinterest": [
+            { "$match" : {publishedAt: {$gt: minTimestamp}}},
+            { $group: {_id: null, total: {$sum: '$social.pinterest'}}},
+          ],
+          "reddit": [
+            { "$match" : {publishedAt: {$gt: minTimestamp}}},
+            { $group: {_id: null, total: {$sum: '$social.reddit'}}},
+          ],
+        }},
+      { "$project": {
+          "total": {"$arrayElemAt": ["$total", 0] },
+          "facebook": {"$arrayElemAt": ["$facebook", 0] },
+          "twitter": {"$arrayElemAt": ["$twitter", 0] },
+          "pinterest": {"$arrayElemAt": ["$pinterest", 0] },
+          "reddit": {"$arrayElemAt": ["$reddit", 0] },
+        }},
+    ]).toArray()).map(results => ({
+      total: results.total.total,
+      facebook: results.facebook.total,
+      twitter: results.twitter.total,
+      pinterest: results.pinterest.total,
+      reddit: results.reddit.total,
+    }));
+
+    return counts[0];
+  },
+
 };
 

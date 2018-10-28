@@ -18,9 +18,6 @@ module.exports.policies = {
   'posts/json-popular': true,
   'posts/rss-popular': true,
 
-  // TODO: Remove this
-  'dashboard/*': true,
-
   // Allow Post API
   'PostController': {
     find: true,

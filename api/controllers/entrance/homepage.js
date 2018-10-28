@@ -1,20 +1,6 @@
 const moment = require('moment');
 const PER_PAGE = 10;
 
-async function getSourceCounts() {
-  return (await Post.getDatastore().manager.collection('post').distinct('feedbinFeedId', {
-    publishedAt: {$gt: moment.utc().subtract(168, 'h').toISOString()}
-  })).length;
-}
-
-async function getSocialCounts() {
-  return (await Post.getDatastore().manager.collection('post').aggregate(
-    {$match: {publishedAt: {$gt: moment.utc().subtract(168, 'h').toISOString()}}},
-    {$group: {_id: null, sum: {$sum: '$social.total'}}},
-    {$project: {_id: 0, sum: 1}}
-  ).toArray())[0].sum;
-}
-
 module.exports = {
   description: 'HTML view of most popular posts within period',
   exits: {
@@ -47,8 +33,8 @@ module.exports = {
       const countHoursBack = 168;
       counts = {
         posts: (await Post.getCounts(countHoursBack)).total,
-        sources: await getSourceCounts(),
-        social: await getSocialCounts(),
+        sources: (await Source.getCounts(countHoursBack)).active,
+        social: (await Post.getSocialCounts(countHoursBack)).total,
       };
     } catch (e) {
       sails.log.error(e);

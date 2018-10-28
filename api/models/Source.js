@@ -1,10 +1,11 @@
+const moment = require('moment');
+
 /**
  * Source.js
  *
  * @description :: A model definition.  Represents a database table/collection/etc.
  * @docs        :: https://sailsjs.com/docs/concepts/models-and-orm/models
  */
-
 module.exports = {
 
   attributes: {
@@ -88,6 +89,20 @@ module.exports = {
 
       return post;
     });
+  },
+
+  getCounts: async (hoursBack) => {
+    if (!hoursBack) {
+      hoursBack = 48;
+    }
+    const minTimestamp = moment.utc().subtract(hoursBack, 'h').toISOString();
+
+    return {
+      total: await Source.getDatastore().manager.collection('source').count(),
+      active: (await Post.getDatastore().manager.collection('post').distinct('feedbinFeedId', {
+        publishedAt: {$gt: minTimestamp}
+      })).length
+    };
   },
 
 };

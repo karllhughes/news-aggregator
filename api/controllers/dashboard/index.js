@@ -17,14 +17,13 @@ module.exports = {
     try {
       data = {
         posts: await Post.getCounts(countHoursBack),
-        // sources: await getSourceCounts(),
-        // social: await getSocialCounts(),
+        sources: await Source.getCounts(countHoursBack),
+        social: await Post.getSocialCounts(countHoursBack),
       };
     } catch (e) {
       sails.log.error(e);
     }
 
-    console.log(data);
     return exits.success({data, query});
   }
 };
