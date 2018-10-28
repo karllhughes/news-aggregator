@@ -1,12 +1,6 @@
 const moment = require('moment');
 const PER_PAGE = 10;
 
-function getPostCounts() {
-  return Post.getDatastore().manager.collection('post').find({
-    publishedAt: {$gt: moment.utc().subtract(168, 'h').toISOString()}
-  }).count();
-}
-
 async function getSourceCounts() {
   return (await Post.getDatastore().manager.collection('post').distinct('feedbinFeedId', {
     publishedAt: {$gt: moment.utc().subtract(168, 'h').toISOString()}
@@ -50,8 +44,9 @@ module.exports = {
     });
 
     try {
+      const countHoursBack = 168;
       counts = {
-        posts: await getPostCounts(),
+        posts: (await Post.getCounts(countHoursBack)).total,
         sources: await getSourceCounts(),
         social: await getSocialCounts(),
       };

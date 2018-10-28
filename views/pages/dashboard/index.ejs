@@ -18,27 +18,36 @@
               <tbody>
               <tr>
                 <th scope="row">Total</th>
-                <td>200</td>
-                <td>100%</td>
+                <td><%= data.posts.total %></td>
+                <td></td>
               </tr>
               <tr>
                 <th scope="row">Unfluffed</th>
-                <td>100</td>
-                <td>80%</td>
+                <td><%= data.posts.unfluffed %></td>
+                <td><%= Number.parseFloat(
+                          (data.posts.unfluffed / data.posts.total) * 100
+                  ).toFixed(2) %>%
+                </td>
               </tr>
               <tr>
                 <th scope="row">Keywords</th>
-                <td>90</td>
-                <td>70%</td>
+                <td><%= data.posts.keywordsAdded %></td>
+                <td><%= Number.parseFloat(
+                          (data.posts.keywordsAdded / data.posts.total) * 100
+                  ).toFixed(2) %>%
+                </td>
               </tr>
               <tr>
                 <th scope="row">Social</th>
-                <td>80</td>
-                <td>60%</td>
+                <td><%= data.posts.socialAdded %></td>
+                <td><%= Number.parseFloat(
+                          (data.posts.socialAdded / data.posts.total) * 100
+                  ).toFixed(2) %>%
+                </td>
               </tr>
               <tr>
                 <th scope="row">Average Length</th>
-                <td>400 words</td>
+                <td><%= data.posts.averageWordLength.toFixed(0) %> words</td>
                 <td></td>
               </tr>
               </tbody>

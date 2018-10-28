@@ -10,8 +10,21 @@ module.exports = {
   },
 
   fn: async function (inputs, exits) {
+    let data = {};
     const query = this.req.query;
-    console.log(query);
-    return exits.success({query});
+    const countHoursBack = (query.days_back * 24) || 48;
+
+    try {
+      data = {
+        posts: await Post.getCounts(countHoursBack),
+        // sources: await getSourceCounts(),
+        // social: await getSocialCounts(),
+      };
+    } catch (e) {
+      sails.log.error(e);
+    }
+
+    console.log(data);
+    return exits.success({data, query});
   }
 };

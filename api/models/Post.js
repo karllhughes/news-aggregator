@@ -1,3 +1,5 @@
+const moment = require('moment');
+
 /**
  * Post.js
  *
@@ -132,6 +134,56 @@ module.exports = {
     // source: {
     //   model: 'source',
     // },
+  },
+
+  getCounts: async (hoursBack) => {
+    if (!hoursBack) {
+      hoursBack = 48;
+    }
+    const minTimestamp = moment.utc().subtract(hoursBack, 'h').toISOString();
+
+    const counts = await Post.getDatastore().manager.collection('post').aggregate([
+      { "$facet": {
+          "total": [
+            { "$match" : {publishedAt: {$gt: minTimestamp}}},
+            { "$count": "total" },
+          ],
+          "unfluffed": [
+            { "$match" : {"$and":[
+              {publishedAt: {$gt: minTimestamp}},
+              {"unfluffedAt":{"$ne":null}}
+            ]}},
+            { "$count": "total" }
+          ],
+          "keywordsAdded": [
+            { "$match" : {"$and":[
+              {publishedAt: {$gt: minTimestamp}},
+              {"keywordsAddedAt":{"$ne":null}}
+            ]}},
+            { "$count": "total" }
+          ],
+          "socialAdded": [
+            { "$match" : {"$and":[
+              {publishedAt: {$gt: minTimestamp}},
+              {"socialUpdatedAt":{"$ne":null}}
+            ]}},
+            { "$count": "total" }
+          ],
+          "averageWordLength": [
+            { "$match" : {publishedAt: {$gt: minTimestamp}}},
+            { $group: {_id: null, average: {$avg: "$wordCount"}}}
+          ],
+        }},
+      {"$project": {
+        "total": { "$arrayElemAt": ["$total.total", 0] },
+        "unfluffed": { "$arrayElemAt": ["$unfluffed.total", 0] },
+        "keywordsAdded": { "$arrayElemAt": ["$keywordsAdded.total", 0] },
+        "socialAdded": { "$arrayElemAt": ["$socialAdded.total", 0] },
+        "averageWordLength": { "$arrayElemAt": ["$averageWordLength.average", 0] },
+      }},
+    ]).toArray();
+
+    return counts[0];
   },
 
 };
