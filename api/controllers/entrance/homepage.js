@@ -25,7 +25,7 @@ module.exports = {
   description: 'HTML view of most popular posts within period',
   exits: {
     success: {
-      viewTemplatePath: 'pages/posts/homepage',
+      viewTemplatePath: 'pages/entrance/homepage',
     },
 
     redirect: {

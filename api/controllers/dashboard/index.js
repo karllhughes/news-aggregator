@@ -7,10 +7,11 @@ module.exports = {
       viewTemplatePath: 'pages/dashboard/index',
       description: 'Display the welcome page for authenticated users.'
     },
-
   },
 
   fn: async function (inputs, exits) {
-    return exits.success();
+    const query = this.req.query;
+    console.log(query);
+    return exits.success({query});
   }
 };

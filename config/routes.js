@@ -14,8 +14,7 @@ module.exports.routes = {
   //  ╦ ╦╔═╗╔╗ ╔═╗╔═╗╔═╗╔═╗╔═╗
   //  ║║║║╣ ╠╩╗╠═╝╠═╣║ ╦║╣ ╚═╗
   //  ╚╩╝╚═╝╚═╝╩  ╩ ╩╚═╝╚═╝╚═╝
-  'GET /': {action: 'posts/homepage'},
-  'GET /dashboard': {action: 'dashboard/index'},
+  'GET /': {action: 'entrance/homepage'},
 
   'GET /signup': {action: 'entrance/view-signup'},
   'GET /email/confirm': {action: 'entrance/confirm-email'},
@@ -28,6 +27,9 @@ module.exports.routes = {
   'GET /account': {action: 'account/view-account-overview'},
   'GET /account/password': {action: 'account/view-edit-password'},
   'GET /account/profile': {action: 'account/view-edit-profile'},
+
+  'GET /dashboard': {action: 'dashboard/index'},
+  'GET /posts': {action: 'posts/index'},
 
 
   //  ╔═╗╔═╗╦  ╔═╗╔╗╔╔╦╗╔═╗╔═╗╦╔╗╔╔╦╗╔═╗

@@ -1,0 +1,11 @@
+<nav class="nav nav-pills">
+  <div class="nav-link">Days back:</div>
+  <a class="nav-link <% if (query.days_back == 2) {%><%= "active" %><% } %>"
+     href="?days_back=2">2</a>
+  <a class="nav-link <% if (query.days_back == 7) {%><%= "active" %><% } %>"
+    href="?days_back=7">7</a>
+  <a class="nav-link <% if (query.days_back == 30) {%><%= "active" %><% } %>"
+     href="?days_back=30">30</a>
+  <a class="nav-link <% if (query.days_back == 90) {%><%= "active" %><% } %>"
+     href="?days_back=90">90</a>
+</nav>

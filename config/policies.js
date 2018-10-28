@@ -15,8 +15,11 @@ module.exports.policies = {
   // Bypass the `is-logged-in` policy for:
   'entrance/*': true,
   'account/logout': true,
-  'posts/*': true,
-  // 'posts/*': true,
+  'posts/json-popular': true,
+  'posts/rss-popular': true,
+
+  // TODO: Remove this
+  'dashboard/*': true,
 
   // Allow Post API
   'PostController': {
