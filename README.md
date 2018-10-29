@@ -32,7 +32,7 @@ hyper fip attach 123.456.78.90 news-db
 Build and push the Docker image:
 
 ```bash
-npm run app:build && npm run app:deploy
+npm run app:deploy
 ```
 
 Run the collector(s):
@@ -62,14 +62,6 @@ hyper cron create --hour=* --minute=8 --env-file=.env --link=news-db --size s4 -
 # Run share counters every 1 hour
 hyper cron create --hour=* --minute=10 --env-file=.env --link=news-db --size s4 --name news-posts-social-24-cron karllhughes/news node node_modules/.bin/sails run add-post-social --hoursBack=24
 hyper cron create --hour=* --minute=10 --env-file=.env --link=news-db --size s4 --name news-posts-social-168-cron karllhughes/news node node_modules/.bin/sails run add-post-social --hoursBack=168
-```
-
-Run a web instance (optional):
-
-```bash
-hyper run -d --env-file=.env --restart=always --link=news-db:news-db --size s4 --name news-app -p 80:80 karllhughes/news node app.js --prod
-
-hyper fip attach <IP> news-app
 ```
 
 
