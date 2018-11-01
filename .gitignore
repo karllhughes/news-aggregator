@@ -131,3 +131,5 @@ lib-cov
 *.pid
 .env
 .env.*
+codeship.aes
+dockercfg

@@ -1,0 +1,13 @@
+- type: serial
+  steps:
+  - service: app
+    command: echo "Building"
+  - service: pusher
+    type: push
+    tag: master
+    image_name: karllhughes/news
+    image_tag: latest
+    encrypted_dockercfg_path: docker-config.encrypted
+  - service: deployer
+    command: bash /scripts/deploy.sh
+    tag: master

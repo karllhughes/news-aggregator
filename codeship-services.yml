@@ -1,0 +1,11 @@
+app:
+  build: .
+pusher:
+  build:
+    image: karllhughes/news
+    dockerfile: Dockerfile
+deployer:
+  image: hyperhq/hypercli
+  encrypted_env_file: .encrypted-env
+  volumes:
+  - ./scripts:/scripts
