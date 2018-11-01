@@ -85,6 +85,9 @@
       </footer>
     </div>
 
+    <% if(sails.config.environment === 'production') { %>
+      <%- include('../partials/tracking') %>
+    <% } %>
 
     <% /*
       Client-side JavaScript
