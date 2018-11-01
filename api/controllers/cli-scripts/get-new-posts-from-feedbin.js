@@ -7,8 +7,8 @@ const _convertEntryToPost = (entry) => {
     url: entry.url,
     author: entry.author,
     summary: entry.summary,
-    publishedAt: entry.published,
-    feedbinCreatedAt: entry.created_at,
+    publishedAt: new Date(entry.published).toISOString(),
+    feedbinCreatedAt: new Date(entry.created_at).toISOString(),
     feedbinFeedId: entry.feed_id,
     feedbinId: entry.id,
   }

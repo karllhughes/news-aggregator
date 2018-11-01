@@ -2,6 +2,7 @@
 
 News and blog data aggregator. Uses Feedbin, SharedCount, and open source natural language processing tools to collect data about news articles and blog posts.
 
+[ ![Codeship Status for karllhughes/news-aggregator](https://app.codeship.com/projects/7ff621b0-bf98-0136-4bb2-2208f8312d1c/status?branch=master)](https://app.codeship.com/projects/313359)
 
 ## Local Development (With Docker)
 
