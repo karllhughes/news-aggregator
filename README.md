@@ -32,7 +32,9 @@ hyper fip attach 123.456.78.90 news-db
 Build and push the Docker image:
 
 ```bash
-npm run app:deploy
+docker build -t karllhughes/news .
+docker push karllhughes/news
+hyper pull karllhughes/news
 ```
 
 Run the collector(s):

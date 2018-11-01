@@ -1,7 +1,7 @@
 - type: serial
   steps:
-  - service: app
-    command: echo "Building"
+#  - service: app
+#    command: echo "Building"
   - service: pusher
     type: push
     tag: master
@@ -9,5 +9,5 @@
     image_tag: latest
     encrypted_dockercfg_path: dockercfg.encrypted
   - service: deployer
-    command: bash /scripts/deploy.sh
+    command: sh /scripts/deploy.sh
     tag: master
