@@ -1,7 +1,7 @@
 - type: serial
   steps:
-#  - service: app
-#    command: echo "Building"
+  - service: app
+    command: echo "Building"
   - service: pusher
     type: push
     tag: master
