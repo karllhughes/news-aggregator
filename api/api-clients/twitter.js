@@ -30,11 +30,9 @@ function getTotalTweets(response) {
 module.exports = {
   baseUrl: 'https://api.twitter.com/1.1/search/tweets.json',
   getCounts: async function (url) {
-    if (!bearerToken) {
-      bearerToken = await getBearerToken();
-    }
+    bearerToken = await getBearerToken();
 
-    return fetch(`${this.baseUrl}?q=${url}&count=100&include_entities=false`, {
+    return await fetch(`${this.baseUrl}?q=${url}&count=100&include_entities=false`, {
       headers: {
         'Authorization': 'Bearer ' + bearerToken,
       },
