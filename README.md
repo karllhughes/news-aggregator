@@ -67,6 +67,20 @@ hyper cron create --hour=* --minute=10 --env-file=.env --link=news-db --size s4 
 hyper cron create --hour=* --minute=10 --env-file=.env --link=news-db --size s4 --name news-posts-social-168-cron karllhughes/news node node_modules/.bin/sails run add-post-social --hoursBack=168
 ```
 
+## DB Backup
+
+I like to periodically back up the Mongo Database. Here's a quick Docker command to do it with:
+
+```bash
+docker run -it --rm --env-file=.env.backup karllhughes/mongodump-s3
+```
+
+Or create a job to do this:
+
+```bash
+hyper cron create --hour=1 --minute=1 --env-file=.env.backup --size s4 --name news-backup-cron karllhughes/mongodump-s3
+```
+
 
 ## Tech Stack
 
