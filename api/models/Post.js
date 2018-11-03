@@ -142,7 +142,7 @@ module.exports = {
     }
     const minTimestamp = moment.utc().subtract(hoursBack, 'h').toISOString();
 
-    const counts = await Post.getDatastore().manager.collection('post').aggregate([
+    const counts = await Post.getCollection().aggregate([
       { "$facet": {
           "total": [
             { "$match" : {publishedAt: {$gt: minTimestamp}}},
@@ -192,7 +192,7 @@ module.exports = {
     }
     const minTimestamp = moment.utc().subtract(hoursBack, 'h').toISOString();
 
-    const counts = (await Post.getDatastore().manager.collection('post').aggregate([
+    const counts = (await Post.getCollection().aggregate([
       { "$facet": {
           "total": [
             { "$match" : {publishedAt: {$gt: minTimestamp}}},
@@ -232,6 +232,10 @@ module.exports = {
 
     return counts[0];
   },
+
+  getCollection: () => {
+    return Post.getDatastore().manager.collection('post');
+  }
 
 };
 
