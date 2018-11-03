@@ -1,11 +1,13 @@
 const fetch = require('node-fetch');
+const sourceRepository = require('../../repositories/source-repository');
 
 module.exports = async () => {
-  // Get posts without logo
-  const sources = await Source.find({
-    where: {and: [{ description: null }, { logo: null }, { image: null }]},
-    limit: 30,
-  });
+  // Get sources without logo
+  const sources = await sourceRepository.getSources(
+    {and: [{ description: null }, { logo: null }, { image: null }]},
+    'createdAt DESC',
+    30
+  );
 
   const updatedSources = sources.map(async (source) => {
     try {

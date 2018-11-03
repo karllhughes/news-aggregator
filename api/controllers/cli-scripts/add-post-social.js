@@ -2,17 +2,17 @@ const moment = require('moment');
 const sharedCountClient = require('../../api-clients/shared-count');
 const redditClient = require('../../api-clients/reddit');
 const twitterClient = require('../../api-clients/twitter');
+const postRepository = require('../../repositories/post-repository');
 
 module.exports = async (hoursBack) => {
-  const posts = await Post.find()
-  .where({
-    publishedAt: {
+  const posts = await postRepository.getPosts(
+    { publishedAt: {
       '>': moment().subtract(hoursBack, 'h').toDate(),
       '<': moment().subtract(hoursBack - 1, 'h').toDate(),
-    },
-  })
-  .sort('publishedAt DESC')
-  .limit(25);
+    }},
+    'publishedAt DESC',
+    25
+  );
 
   // Get social counts for each
   const updatedPosts = posts.map(async (post) => {
@@ -42,7 +42,7 @@ module.exports = async (hoursBack) => {
     // Save the results
     try {
       updatedPost.social.total = Object.values(updatedPost.social).reduce((a, b) => a + b, 0);
-      return Post.update({id: post.id}, updatedPost);
+      return await postRepository.updatePost(post.id, updatedPost);
     } catch (e) {
       sails.log.error(e);
     }

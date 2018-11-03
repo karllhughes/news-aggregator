@@ -1,7 +1,7 @@
 const natural = require('natural');
 const tokenizer = new natural.WordTokenizer();
 const stopWords = require('../../../extras/stop-words');
-
+const postRepository = require('../../repositories/post-repository');
 
 function getKeywordsFromText(text) {
   let wordsArray = tokenizer.tokenize(text)
@@ -27,11 +27,11 @@ function getKeywordsFromText(text) {
 
 module.exports = async () => {
   // Get posts where unfluffedAt is not null
-  const posts = await Post.find({
-    where: { text: {'!=': null} },
-    sort: 'feedbinCreatedAt DESC',
-    limit: 100,
-  });
+  const posts = await postRepository.getPosts(
+    {and: [{ text: {'!=': null} }, { keywordsAddedAt: null }]},
+    'feedbinCreatedAt DESC',
+    100
+  );
 
   // Loop through posts
   const updatedPosts = posts.map(async (post) => {
@@ -45,7 +45,7 @@ module.exports = async () => {
 
     // Save the results
     try {
-      return await Post.update({id: post.id}, updatedPost);
+      return await postRepository.updatePost(post.id, updatedPost);
     } catch (e) {
       sails.log.error(e);
     }

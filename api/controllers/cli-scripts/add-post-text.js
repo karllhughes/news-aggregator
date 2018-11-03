@@ -1,15 +1,17 @@
 const fetch = require('node-fetch');
 const unfluff = require('unfluff');
 const lc = require('letter-count');
+const postRepository = require('../../repositories/post-repository');
+const validUrl = require('valid-url');
 
 module.exports = async () => {
 
   // Get posts without unfluffedAt set
-  const posts = await Post.find({
-    where: { unfluffedAt: null },
-    sort: 'feedbinCreatedAt DESC',
-    limit: 100,
-  });
+  const posts = await postRepository.getPosts(
+    { unfluffedAt: null },
+    'feedbinCreatedAt DESC',
+    100
+  );
 
   const unfluffResults = posts.map(async (post) => {
     let updatedPost = { unfluffedAt: new Date() };
@@ -28,7 +30,7 @@ module.exports = async () => {
           wordCount: counts.words,
         };
 
-        if (unfluffed.image) {
+        if (unfluffed.image && unfluffed.image.length && validUrl.isUri(unfluffed.image)) {
           updatedPost.imageUrl = unfluffed.image;
         }
 
@@ -40,7 +42,7 @@ module.exports = async () => {
 
     // Save the results
     try {
-      return await Post.update({id: post.id}, updatedPost);
+      return await postRepository.updatePost(post.id, updatedPost);
     } catch (e) {
       sails.log.error(e);
     }
