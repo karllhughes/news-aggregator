@@ -10,7 +10,11 @@ module.exports = {
   },
 
   fn: async function (inputs, exits) {
-    let data = {};
+    let data = {
+      posts: {},
+      sources: {},
+      social: {},
+    };
     const query = this.req.query;
     const countHoursBack = (query.days_back * 24) || 48;
 

@@ -1,4 +1,5 @@
 const moment = require('moment');
+const postRepository = require('../../repositories/post-repository');
 
 module.exports = {
   description: 'Get popular posts',
@@ -16,28 +17,22 @@ module.exports = {
   },
   exits: {success: {outputType: 'ref'}},
   fn: async function (inputs, exits) {
-    let posts = await Post.getCollection().find({
-      $and: [
-        {social: {$ne: null}},
-        {
-          publishedAt: {
-            $gt: moment.utc().subtract(inputs.options.maxHoursBack, 'h').toISOString(),
-            $lte: moment.utc().subtract(24, 'h').toISOString(),
-          },
-        },
-      ]
-    })
-    .sort({'social.total': -1})
-    .skip(
-      inputs.options.pageLinks.currentPage > 1 ?
-      ((inputs.options.pageLinks.currentPage - 1) * inputs.options.perPage) :
-      0
-    )
-    .limit(inputs.options.perPage)
-    .toArray();
+    let posts;
+    const where = { publishedAt: {
+      '>': moment.utc().subtract(inputs.options.maxHoursBack, 'h').toDate(),
+      '<': moment.utc().subtract(24, 'h').toDate(),
+    }};
+    const skip = inputs.options.pageLinks.currentPage > 1 ?
+      ((inputs.options.pageLinks.currentPage - 1) * inputs.options.perPage) : 0;
 
     if (inputs.options.withSource) {
-      posts = await Source.joinToPosts(posts);
+      posts = await postRepository.getPostsWithSources(
+        where, 'social.total DESC', inputs.options.perPage, skip
+      );
+    } else {
+      posts = await postRepository.getPosts(
+        where, 'social.total DESC', inputs.options.perPage, skip
+      );
     }
 
     return exits.success(posts);

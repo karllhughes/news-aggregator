@@ -3,24 +3,27 @@ const postRepository = {
   defaultSort: 'publishedAt DESC',
   defaultLimit: 20,
 
-  getPosts: async (where, sort, limit) => {
+  async getPosts(where, sort, limit, skip) {
     where = where || {};
     sort = sort || this.defaultSort;
     limit = limit || this.defaultLimit;
+    skip = skip || 0;
 
     return await Post.find()
       .where(where)
       .sort(sort)
-      .limit(limit);
+      .limit(limit)
+      .skip(skip)
+      .meta({enableExperimentalDeepTargets:true});
   },
 
-  getPostsWithSources: async (where, sort, limit) => {
+  async getPostsWithSources(where, sort, limit, skip) {
     return Source.joinToPosts(
-      await this.getPosts(where, sort, limit)
+      await this.getPosts(where, sort, limit, skip)
     );
   },
 
-  updatePost: async (id, post) => {
+  async updatePost(id, post) {
     return await Post.update({id}, post);
   },
 };
