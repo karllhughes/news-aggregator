@@ -4,16 +4,15 @@ const redditClient = require('../../api-clients/reddit');
 const twitterClient = require('../../api-clients/twitter');
 
 module.exports = async (hoursBack) => {
-  const posts = await Post.find({
-    where: {
-      and: [
-        {publishedAt: {'>': moment().subtract(hoursBack, 'h').toISOString()}},
-        {publishedAt: {'<': moment().subtract(hoursBack - 1, 'h').toISOString()}},
-      ],
+  const posts = await Post.find()
+  .where({
+    publishedAt: {
+      '>': moment().subtract(hoursBack, 'h').toDate(),
+      '<': moment().subtract(hoursBack - 1, 'h').toDate(),
     },
-    sort: 'publishedAt DESC',
-    limit: 25,
-  }).meta({enableExperimentalDeepTargets: true});
+  })
+  .sort('publishedAt DESC')
+  .limit(25);
 
   // Get social counts for each
   const updatedPosts = posts.map(async (post) => {

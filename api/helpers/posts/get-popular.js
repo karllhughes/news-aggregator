@@ -16,8 +16,7 @@ module.exports = {
   },
   exits: {success: {outputType: 'ref'}},
   fn: async function (inputs, exits) {
-    const db = Post.getDatastore().manager;
-    let posts = await db.collection('post').find({
+    let posts = await Post.getCollection().find({
       $and: [
         {social: {$ne: null}},
         {
