@@ -140,7 +140,7 @@ module.exports = {
     if (!hoursBack) {
       hoursBack = 48;
     }
-    const minTimestamp = moment.utc().subtract(hoursBack, 'h').toISOString();
+    const minTimestamp = moment.utc().subtract(hoursBack, 'h').toDate();
 
     const counts = await Post.getCollection().aggregate([
       { "$facet": {
@@ -190,7 +190,7 @@ module.exports = {
     if (!hoursBack) {
       hoursBack = 48;
     }
-    const minTimestamp = moment.utc().subtract(hoursBack, 'h').toISOString();
+    const minTimestamp = moment.utc().subtract(hoursBack, 'h').toDate();
 
     const counts = (await Post.getCollection().aggregate([
       { "$facet": {

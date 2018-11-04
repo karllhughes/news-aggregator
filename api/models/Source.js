@@ -95,7 +95,7 @@ module.exports = {
     if (!hoursBack) {
       hoursBack = 48;
     }
-    const minTimestamp = moment.utc().subtract(hoursBack, 'h').toISOString();
+    const minTimestamp = moment.utc().subtract(hoursBack, 'h').toDate();
 
     return {
       total: await Source.getDatastore().manager.collection('source').count(),
