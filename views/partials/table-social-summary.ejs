@@ -1,0 +1,35 @@
+<% if (data.social && data.social.total) { %>
+  <div class="mb-1">
+    <button type="button"
+            class="btn btn-success btn-sm"
+            data-toggle="collapse"
+            data-target="#collapseSocial<%= data.id %>"
+            aria-expanded="false"
+            aria-controls="collapseSocial<%= data.id %>"
+    >
+      Total <span class="badge badge-light"><%= data.social.total %></span>
+    </button>
+  </div>
+  <div class="collapse" id="collapseSocial<%= data.id %>">
+    <div class="mb-1">
+      <button type="button" class="btn btn-primary btn-sm">
+        Facebook <span class="badge badge-light"><%= data.social.facebook %></span>
+      </button>
+    </div>
+    <div class="mb-1">
+      <button type="button" class="btn btn-primary btn-sm">
+        Twitter <span class="badge badge-light"><%= data.social.twitter %></span>
+      </button>
+    </div>
+    <div class="mb-1">
+      <button type="button" class="btn btn-danger btn-sm">
+        Pinterest <span class="badge badge-light"><%= data.social.pinterest %></span>
+      </button>
+    </div>
+    <div class="mb-1">
+      <button type="button" class="btn btn-danger btn-sm">
+        Reddit <span class="badge badge-light"><%= data.social.reddit %></span>
+      </button>
+    </div>
+  </div>
+<% } %>

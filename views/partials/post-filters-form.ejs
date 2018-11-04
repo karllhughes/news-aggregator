@@ -1,0 +1,95 @@
+<form class="card card-body mb-3" action="/posts" method="get">
+  <div class="form-group">
+    <label for="search">Search</label>
+    <input type="text"
+           class="form-control"
+           id="search"
+           name="search"
+           disabled
+           placeholder="Search post text and title"
+           <% if (query.search) { %><%= `value=${query.search}` %><% } %>
+    >
+  </div>
+  <div class="form-group">
+    <label for="feedbinFeedId">Source</label>
+    <input type="number"
+           class="form-control"
+           id="feedbinFeedId"
+           name="feedbinFeedId"
+           placeholder="Feedbin Source ID"
+           <% if (query.feedbinFeedId) { %><%= `value=${query.feedbinFeedId}` %><% } %>
+    >
+  </div>
+  <div class="form-group">
+    <label for="author">Author</label>
+    <input type="text"
+           class="form-control"
+           id="author"
+           name="author"
+           placeholder="Author Name"
+           <% if (query.author) { %><%= `value=${query.author}` %><% } %>
+    >
+  </div>
+
+  <h5>Published Between</h5>
+  <div class="form-row">
+    <div class="form-group col-md">
+      <label for="startDate">Start Date</label>
+      <input type="text"
+             class="form-control"
+             id="startDate"
+             name="startDate"
+             placeholder="1/1/2017"
+             <% if (query.startDate) { %>
+               value="<%= `${sails.config.globals.moment(query.startDate).format('l')}` %>"
+             <% } %>
+      >
+    </div>
+    <div class="form-group col-md">
+      <label for="endDate">End Date</label>
+      <input type="text"
+             class="form-control"
+             id="endDate"
+             name="endDate"
+             placeholder="12/1/2018"
+             <% if (query.endDate) { %>
+               value="<%= `${sails.config.globals.moment(query.endDate).format('l')}` %>"
+             <% } %>
+      >
+    </div>
+  </div>
+
+  <h5>Social</h5>
+  <p class="form-text text-muted">
+    Filters posts by those having <strong>at least</strong> the specified number of social mentions.
+  </p>
+  <div class="form-row">
+    <div class="form-group col-md">
+      <label for="total">Total</label>
+      <input type="number" class="form-control" name="social[total]" placeholder="Total"
+      <% if (query.social && query.social.total) { %><%= `value=${query.social.total}` %><% } %>>
+    </div>
+    <div class="form-group col-md">
+      <label for="facebook">Facebook</label>
+      <input type="number" class="form-control" name="social[facebook]" placeholder="Facebook"
+      <% if (query.social && query.social.facebook) { %><%= `value=${query.social.facebook}` %><% } %>>
+    </div>
+    <div class="form-group col-md">
+      <label for="twitter">Twitter</label>
+      <input type="number" class="form-control" name="social[twitter]" placeholder="Twitter"
+      <% if (query.social && query.social.twitter) { %><%= `value=${query.social.twitter}` %><% } %>>
+    </div>
+    <div class="form-group col-md">
+      <label for="pinterest">Pinterest</label>
+      <input type="number" class="form-control" name="social[pinterest]" placeholder="Pinterest"
+      <% if (query.social && query.social.pinterest) { %><%= `value=${query.social.pinterest}` %><% } %>>
+    </div>
+    <div class="form-group col-md">
+      <label for="reddit">Reddit</label>
+      <input type="number" class="form-control" name="social[reddit]" placeholder="Reddit"
+      <% if (query.social && query.social.reddit) { %><%= `value=${query.social.reddit}` %><% } %>>
+    </div>
+  </div>
+
+  <button type="submit" class="btn btn-primary">Filter</button>
+</form>

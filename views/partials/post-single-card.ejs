@@ -17,7 +17,7 @@
   <div class="card-footer text-center">
     <div class="row">
       <div class="col-md-6 text-md-left">
-        <%= moment(post.publishedAt).format('LLL') %>
+        <%= sails.config.globals.moment(post.publishedAt).format('LLL') %>
       </div>
       <div class="col-md-6 text-md-right">
         <% if (post.source) { %>

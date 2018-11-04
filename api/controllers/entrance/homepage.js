@@ -1,4 +1,3 @@
-const moment = require('moment');
 const PER_PAGE = 10;
 
 module.exports = {
@@ -40,6 +39,6 @@ module.exports = {
       sails.log.error(e);
     }
 
-    return exits.success({posts, moment, pageLinks, counts, hideNav: true});
+    return exits.success({posts, pageLinks, counts, hideNav: true});
   },
 };

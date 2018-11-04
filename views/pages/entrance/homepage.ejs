@@ -53,18 +53,20 @@
       </div>
     <% } %>
 
-    <div class="row">
-      <div class="col-md-8 offset-md-2">
-        <h3 class="mb-3 text-center">
-          Today's Most Popular Posts
-          <a href="/rss/popular-posts" class="ml-2 text-warning"><i class="fa fa-rss"></i></a>
-        </h3>
+    <% if (posts && posts.length > 0) { %>
+      <div class="row">
+        <div class="col-md-8 offset-md-2">
+          <h3 class="mb-3 text-center">
+            Today's Most Popular Posts
+            <a href="/rss/popular-posts" class="ml-2 text-warning"><i class="fa fa-rss"></i></a>
+          </h3>
 
-        <% for (let i=0; i<posts.length; i++) {%>
-          <%- include('../../partials/post-single-card', {post: posts[i]}); %>
-        <% } %>
+          <% for (let i=0; i<posts.length; i++) {%>
+            <%- include('../../partials/post-single-card', {post: posts[i]}); %>
+          <% } %>
+        </div>
       </div>
-    </div>
+    <% } %>
 
     <div class="row mb-5">
       <div class="col-md-8 offset-md-2">

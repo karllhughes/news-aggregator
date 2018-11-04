@@ -30,6 +30,8 @@ hyper run -d -v news-db:/data/db --env-file=.env -p 35019:27017 --size s4 --name
 hyper fip attach 123.456.78.90 news-db
 ```
 
+Add a text index to the database: `db.getCollection('post').createIndex( { title: "text", text: "text" } );`.
+
 Build and push the Docker image:
 
 ```bash

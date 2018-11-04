@@ -1,34 +1,69 @@
 const moment = require('moment');
+const postRepository = require('../../repositories/post-repository');
 
-function getPagination(query, baseLink, perPage) {
-  const currentPage = query.page ? Number(query.page) : 1;
-  const nextPage = query.page ? Number(query.page) + 1 : 2;
-  const previousPage = query.page ? Number(query.page) - 1 : undefined;
+const postQueryParamsParser = {
+  defaultPerPage: 20,
 
-  return {
-    baseLink,
-    currentPage,
-    nextPage,
-    perPage,
-    previousPage,
-  };
-}
+  getPagination(query, baseLink) {
+    const currentPage = query.page ? Number(query.page) : 1;
+    const nextPage = currentPage + 1;
+    const previousPage = currentPage > 1 ? currentPage - 1 : undefined;
+    const perPage = query.perPage || this.defaultPerPage;
 
-async function getData(pagination) {
-  let data = await Post.getCollection()
-    .find({})
-    .sort({publishedAt: -1})
-    .skip((pagination.currentPage - 1) * pagination.perPage)
-    .limit(pagination.perPage)
-    .toArray();
+    return {
+      baseLink,
+      currentPage,
+      nextPage,
+      perPage,
+      previousPage,
+    };
+  },
 
-  // Join sources
-  data = await Source.joinToPosts(data);
+  getWhere(query) {
+    let where = {and: []};
 
-  // Format dates
-  data.map(post => post.publishedAt = moment(post.publishedAt).format('l LT'));
+    if (query.author) {
+      where.and.push({ author: {'contains': query.author }});
+    }
 
-  return data;
+    if (query.feedbinFeedId) {
+      where.and.push({ feedbinFeedId: query.feedbinFeedId });
+    }
+
+    if (query.startDate || query.endDate) {
+      const publishedAt = {};
+
+      if (query.startDate) {
+        publishedAt['>'] = moment(query.startDate, 'M/D/YY').toDate();
+      }
+      if (query.endDate) {
+        publishedAt['<'] = moment(query.endDate, 'M/D/YY').toDate();
+      }
+
+      where.and.push({publishedAt});
+    }
+
+    if (query.social) {
+      // Loop through each social and push new restrictions
+      Object.entries(query.social).map(([key, value]) => {
+        if (value) {
+          where.and.push({[`social.${key}`]: {'>=': Number(value)}});
+        }
+      });
+    }
+
+    return where;
+  },
+};
+
+
+async function getData(where, pagination) {
+  return await postRepository.getPostsWithSources(
+    where,
+    'publishedAt DESC',
+    pagination.perPage,
+    (pagination.currentPage - 1) * pagination.perPage
+  );
 }
 
 module.exports = {
@@ -42,16 +77,17 @@ module.exports = {
   },
 
   fn: async function (inputs, exits) {
-    const perPage = 20;
-
     // Parse inputs
     const query = this.req.query;
 
     // Create pagination object
-    const pagination = getPagination(query, '/posts?', perPage);
+    const pagination = postQueryParamsParser.getPagination(query, '/posts?');
+
+    // Get where clause from query
+    const where = postQueryParamsParser.getWhere(query);
 
     // Make the query
-    let data = await getData(pagination);
+    let data = await getData(where, pagination);
 
     // Return results
     const response = {
