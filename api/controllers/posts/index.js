@@ -1,17 +1,25 @@
 const moment = require('moment');
 const postRepository = require('../../repositories/post-repository');
+const qs = require('qs');
 
 const postQueryParamsParser = {
   defaultPerPage: 20,
+  defaultSort: 'publishedAt DESC',
 
-  getPagination(query, baseLink) {
+  getPagination(query) {
     const currentPage = query.page ? Number(query.page) : 1;
     const nextPage = currentPage + 1;
     const previousPage = currentPage > 1 ? currentPage - 1 : undefined;
     const perPage = query.perPage || this.defaultPerPage;
+    const mutableQuery = {...query};
+    delete(mutableQuery.page);
+    const baseLink = '/posts?' + qs.stringify(mutableQuery) + '&';
+    delete(mutableQuery.sort);
+    const baseSortLink = '/posts?' + qs.stringify(mutableQuery) + '&';
 
     return {
       baseLink,
+      baseSortLink,
       currentPage,
       nextPage,
       perPage,
@@ -54,13 +62,17 @@ const postQueryParamsParser = {
 
     return where;
   },
+
+  getSort(query) {
+    return query.sort ? query.sort : this.defaultSort;
+  },
 };
 
 
-async function getData(where, pagination) {
+async function getData(where, sort, pagination) {
   return await postRepository.getPostsWithSources(
     where,
-    'publishedAt DESC',
+    sort,
     pagination.perPage,
     (pagination.currentPage - 1) * pagination.perPage
   );
@@ -77,17 +89,20 @@ module.exports = {
   },
 
   fn: async function (inputs, exits) {
-    // Parse inputs
     const query = this.req.query;
+    sails.log(query);
+
+    // Get sort string
+    const sort = postQueryParamsParser.getSort(query);
 
     // Create pagination object
-    const pagination = postQueryParamsParser.getPagination(query, '/posts?');
+    const pagination = postQueryParamsParser.getPagination(query);
 
     // Get where clause from query
     const where = postQueryParamsParser.getWhere(query);
 
     // Make the query
-    let data = await getData(where, pagination);
+    let data = await getData(where, sort, pagination);
 
     // Return results
     const response = {

@@ -1,0 +1,8 @@
+<a href="<%= pagination.baseSortLink %>sort=<%= field %> DESC"
+   class="<% if (query && query.sort === field + ' DESC') { %>text-primary<% } else { %>text-muted<% } %>">
+  <i class="fa fa-arrow-down"></i>
+</a>
+<a href="<%= pagination.baseSortLink %>sort=<%= field %> ASC"
+   class="<% if (query && query.sort === field + ' ASC') { %>text-primary<% } else { %>text-muted<% } %>">
+  <i class="fa fa-arrow-up"></i>
+</a>

@@ -18,11 +18,17 @@
 
     <table class="table">
       <thead>
-      <tr>
-        <th>Title</th>
+      <tr style="white-space: nowrap;">
+        <th>Title
+          <%- include('../../partials/sortable-arrows', { pagination, query, field: 'title'} ) %>
+        </th>
         <th>Source/Author</th>
-        <th>Published</th>
-        <th style="width: 180px;">Social</th>
+        <th>Published
+          <%- include('../../partials/sortable-arrows', { pagination, query, field: 'publishedAt'} ) %>
+        </th>
+        <th style="width: 180px;">Social
+          <%- include('../../partials/sortable-arrows', { pagination, query, field: 'social.total'} ) %>
+        </th>
         <th>Length</th>
       </tr>
       </thead>
