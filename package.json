@@ -50,7 +50,7 @@
   "author": "karl",
   "license": "",
   "engines": {
-    "node": ">=9.11"
+    "node": ">=8"
   },
   "nodemonConfig": {
     "ignore": [

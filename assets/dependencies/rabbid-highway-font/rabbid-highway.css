@@ -1,0 +1,13 @@
+@font-face {
+  font-family: 'RabbidHighway';
+  src: url('/dependencies/rabbid-highway-font/RabbidHighwaySignII.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'RabbidHighway';
+  src: url('/dependencies/rabbid-highway-font/RabbidHighwaySignIIObl.woff') format('woff');
+  font-weight: normal;
+  font-style: italic;
+}

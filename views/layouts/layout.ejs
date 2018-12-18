@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Foredus</title>
+    <title>For Edus | The Web's Best Education News</title>
 
     <% /* Viewport tag for sensible mobile support */ %>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -19,15 +19,34 @@
     <!--STYLES-->
     <link rel="stylesheet" href="/dependencies/bootstrap-4/bootstrap-4.css">
     <link rel="stylesheet" href="/dependencies/font-awesome-4/css/font-awesome.css">
+    <link rel="stylesheet" href="/dependencies/rabbid-highway-font/rabbid-highway.css">
     <link rel="stylesheet" href="/styles/importer.css">
     <!--STYLES END-->
+
+    <link rel="apple-touch-icon" sizes="57x57" href="/icons/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/icons/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/icons/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/icons/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/icons/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/icons/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/icons/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/icons/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192"  href="/icons/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/icons/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png">
+    <link rel="manifest" href="/icons/manifest.json">
+    <meta name="msapplication-TileColor" content="#FEF181">
+    <meta name="msapplication-TileImage" content="/icons/ms-icon-144x144.png">
+    <meta name="theme-color" content="#FEF181">
   </head>
 
   <body>
     <div id="page-wrap">
       <% if(typeof hideNav === "undefined") { %>
       <header id="page-header" class="navbar navbar-expand-sm navbar-light bg-light flex-column flex-md-row justify-content-between">
-        <a class="navbar-brand mr-0" href="/">Foredus</a>
+        <a class="navbar-brand mr-0" href="/">For Edus</a>
         <div class="navbar-nav flex-row">
           <!-- LOGGED-IN NAVIGATION -->
           <% if(me) { %>
@@ -75,13 +94,16 @@
 
       <footer id="page-footer" class="navbar navbar-light justify-content-between flex-row-reverse">
         <div class="nav">
-          <% if(me) { %>
-            <small class="nav-item"><a class="nav-link text-primary" href="/logout">Log out</a></small>
-          <% } else { %>
-            <small class="nav-item"><a class="nav-link text-primary" href="/login">Log in</a></small>
-          <% } %>
+            <small class="nav-item">
+              Want more data? API access?
+              Email us at
+              <a class="text-primary" href="mailto:info@foredus.com">info@foredus.com</a>.
+            </small>
         </div>
-        <small class="copy">Copyright &copy; 2018 Foredus. <br class="xs-only"/>All rights reserved.</small>
+        <small class="copy">
+          Copyright &copy; 2018 <a href="https://www.portablecto.com/">Portable CTO, LLC</a>.
+          <br class="xs-only"/>All rights reserved.
+          </small>
       </footer>
     </div>
 
