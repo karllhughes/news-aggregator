@@ -12,6 +12,9 @@ module.exports = function rssOk(data) {
       categories: post.metaTags || [],
       author: post.author || null,
       date: post.publishedAt,
+      custom_elements: [
+        { 'popularity': (post.social.total || 0) },
+      ],
     })
   });
 

@@ -27,6 +27,28 @@ h1, h2, h3, h4, h5, h6 {
   -webkit-appearance: none;
 }
 
+button.btn.btn-primary, a.btn.btn-primary {
+  border-color: @primary;
+  background: @primary;
+}
+
+button.btn.btn-outline-primary, a.btn.btn-outline-primary {
+  border-color: @primary;
+  color: @primary;
+
+  &:hover {
+    background: @primary;
+    color: #ffffff;
+  }
+}
+
+a {
+  color: @primary;
+}
+.text-primary {
+  color: @primary !important;
+}
+
 // Custom modal styles
 .modal-backdrop {
   background-color: @accent-white;

@@ -16,7 +16,7 @@ module.exports.routes = {
   //  ╚╩╝╚═╝╚═╝╩  ╩ ╩╚═╝╚═╝╚═╝
   'GET /': {action: 'entrance/homepage'},
 
-  'GET /signup': {action: 'entrance/view-signup'},
+  // 'GET /signup': {action: 'entrance/view-signup'},
   'GET /email/confirm': {action: 'entrance/confirm-email'},
   'GET /email/confirmed': {view: 'pages/entrance/confirmed-email'},
 

@@ -1,84 +1,112 @@
 <div class="jumbotron mb-4 text-center">
-  <div class="container">
-    <div class="row mb-3 mt-3">
-      <div class="col-md-6 offset-md-3">
-        <h1 class="display-3 site-title">
-          <a href="/" class="text-dark">
-            <img class="img-fluid main-logo" src="images/logo-no-bg.png" alt="For Edus" />
-          </a>
-        </h1>
-        <p class="lead tagline mb-5">The Web's Best Education News.</p>
-      </div>
-    </div>
+    <div class="container">
+        <div class="row mb-3 mt-3">
+            <div class="col-md-6 offset-md-3">
+                <h1 class="display-3 site-title">
+                    <a href="/" class="text-dark">
+                        <img class="img-fluid main-logo" src="images/logo-no-bg.png" alt="For Edus"/>
+                    </a>
+                </h1>
+                <p class="lead tagline mb-5">The Web's Best Education News.</p>
+            </div>
+        </div>
 
-    <div id="home-signup" class="row mb-3 mt-3">
-      <div class="col-md-6 offset-md-3">
-        <p class="text-left">Sign up to receive our <strong>weekly email of the most important and impactful education news</strong> gathered from across the web.</p>
-        <form action="https://karllhughes.us15.list-manage.com/subscribe/post?u=4eba8b205fc13380cd3e6f3fc&amp;id=a20d14cf2b" class="text-left" method="post" target="_blank">
-          <div class="form-group">
-            <label for="mce-EMAIL" style="display: none;">Email Address</label>
-            <input type="email" placeholder="Enter your email address" class="form-control" required="required" name="EMAIL" id="mce-EMAIL">
-          </div>
-          <button type="submit" class="btn btn-primary btn-block"><i class="fa fa-envelope-o"></i> Subscribe</button>
-          <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_97f1bc02efa56031b67a2b00f_fc7b4ce646" tabindex="-1" value=""></div>
-        </form>
-      </div>
+        <div id="home-signup" class="row mb-3 mt-3">
+            <div class="col-md-6 offset-md-3">
+                <p class="text-left">Sign up to receive our <strong>weekly email of the most important and impactful
+                        education news</strong> gathered from across the web.</p>
+                <form action="https://karllhughes.us15.list-manage.com/subscribe/post?u=4eba8b205fc13380cd3e6f3fc&amp;id=a20d14cf2b"
+                      class="text-left" method="post" target="_blank">
+                    <div class="form-group">
+                        <label for="mce-EMAIL" style="display: none;">Email Address</label>
+                        <input type="email" placeholder="Enter your email address" class="form-control"
+                               required="required" name="EMAIL" id="mce-EMAIL">
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block"><i class="fa fa-envelope-o"></i> Subscribe
+                    </button>
+                    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text"
+                                                                                              name="b_97f1bc02efa56031b67a2b00f_fc7b4ce646"
+                                                                                              tabindex="-1" value="">
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
 
 <div class="posts">
-  <div class="container">
-    <% if (counts) { %>
-      <div id="weekly-data" class="row mb-5">
-        <div class="col-md-8 offset-md-2">
-          <h2 class="mb-3 text-center">Weekly Data</h2>
-          <div class="row">
-            <div class="col">
-              <%- include('../../partials/number-card', {
-                header: '<i class="fa fa-newspaper-o"></i> Posts',
-                value: counts.posts
-              }); %>
+    <div class="container">
+        <% if (counts) { %>
+            <div id="weekly-data" class="row mb-5">
+                <div class="col-md-8 offset-md-2">
+                    <h2 class="mb-3 text-center">Weekly Data</h2>
+                    <div class="row">
+                        <div class="col">
+                            <%- include('../../partials/number-card', {
+                            header: '<i class="fa fa-newspaper-o"></i> Posts',
+                            value: counts.posts
+                            }); %>
+                        </div>
+                        <div class="col">
+                            <%- include('../../partials/number-card', {
+                            header: '<i class="fa fa-building"></i> Sources',
+                            value: counts.sources
+                            }); %>
+                        </div>
+                        <div class="col">
+                            <%- include('../../partials/number-card', {
+                            header: '<i class="fa fa-thumbs-up"></i> Shares',
+                            value: counts.social
+                            }); %>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="col">
-              <%- include('../../partials/number-card', {
-                header: '<i class="fa fa-building"></i> Sources',
-                value: counts.sources
-              }); %>
+        <% } %>
+
+        <% if (posts && posts.length > 0) { %>
+            <div class="row">
+                <div class="col-md-8 offset-md-2">
+                    <h3 class="mb-3 text-center">
+                        Today's Most Popular Posts
+                        <a href="/rss/popular-posts" class="ml-2 text-warning"><i class="fa fa-rss"></i></a>
+                    </h3>
+
+                    <% for (let i = 0; i < posts.length; i++) { %>
+                        <%- include('../../partials/post-single-card', {post: posts[i]}); %>
+                    <% } %>
+                </div>
             </div>
-            <div class="col">
-              <%- include('../../partials/number-card', {
-                header: '<i class="fa fa-thumbs-up"></i> Shares',
-                value: counts.social
-              }); %>
+        <% } %>
+
+        <div class="row mb-5">
+            <div class="col-md-8 offset-md-2">
+                <a href="#home-signup" class="btn btn-outline-primary btn-lg btn-block">
+                    <i class="fa fa-envelope-o"></i> Subscribe for More
+                </a>
             </div>
-          </div>
         </div>
-      </div>
-    <% } %>
-
-    <% if (posts && posts.length > 0) { %>
-      <div class="row">
-        <div class="col-md-8 offset-md-2">
-          <h3 class="mb-3 text-center">
-            Today's Most Popular Posts
-            <a href="/rss/popular-posts" class="ml-2 text-warning"><i class="fa fa-rss"></i></a>
-          </h3>
-
-          <% for (let i=0; i<posts.length; i++) {%>
-            <%- include('../../partials/post-single-card', {post: posts[i]}); %>
-          <% } %>
+        <div class="row mb-5">
+            <div class="col-md-8 offset-md-2">
+                <h3 class="text-center">About For Edus</h3>
+                <p>
+                    For Edus collects the latest education blog posts and news every day,
+                    analyzes the content, and determines how widely it's being shared
+                    across the internet. We get data from hundreds of sources to offer a wide
+                    range of perspectives and topics within the education space.
+                </p>
+                <p>
+                    We have big plans for this data, so expect much more in the future,
+                    but if you'd like to collaborate or learn more, just email
+                    <a href="mailto:info@foredus.com" target="_blank">info@foredus.com</a>. You can
+                    also <a href="#home-signup">subscribe to our newsletter</a>
+                    to get a summary of the top articles delivered to your inbox every week,
+                    or <a href="https://twitter.com/goforedus" target="_blank">follow us on Twitter</a>
+                    to get daily updates.
+                </p>
+            </div>
         </div>
-      </div>
-    <% } %>
 
-    <div class="row mb-5">
-      <div class="col-md-8 offset-md-2">
-        <a href="#home-signup" class="btn btn-outline-primary btn-lg btn-block">
-          <i class="fa fa-envelope-o"></i> Subscribe for More
-        </a>
-      </div>
     </div>
-  </div>
 </div>
 <%- /* Expose locals as `window.SAILS_LOCALS` :: */ exposeLocalsToBrowser() %>
