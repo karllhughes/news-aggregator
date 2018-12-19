@@ -143,47 +143,74 @@ module.exports = {
     const minTimestamp = moment.utc().subtract(hoursBack, 'h').toDate();
 
     const counts = await Post.getCollection().aggregate([
-      { "$facet": {
-          "total": [
-            { "$match" : {publishedAt: {$gt: minTimestamp}}},
-            { "$count": "total" },
+      {
+        '$facet': {
+          'total': [
+            {'$match': {publishedAt: {$gt: minTimestamp}}},
+            {'$count': 'total'},
           ],
-          "unfluffed": [
-            { "$match" : {"$and":[
-              {publishedAt: {$gt: minTimestamp}},
-              {"unfluffedAt":{"$ne":null}}
-            ]}},
-            { "$count": "total" }
+          'unfluffed': [
+            {
+              '$match': {
+                '$and': [
+                  {publishedAt: {$gt: minTimestamp}},
+                  {'unfluffedAt': {'$ne': null}}
+                ]
+              }
+            },
+            {'$count': 'total'}
           ],
-          "keywordsAdded": [
-            { "$match" : {"$and":[
-              {publishedAt: {$gt: minTimestamp}},
-              {"keywordsAddedAt":{"$ne":null}}
-            ]}},
-            { "$count": "total" }
+          'keywordsAdded': [
+            {
+              '$match': {
+                '$and': [
+                  {publishedAt: {$gt: minTimestamp}},
+                  {'keywordsAddedAt': {'$ne': null}}
+                ]
+              }
+            },
+            {'$count': 'total'}
           ],
-          "socialAdded": [
-            { "$match" : {"$and":[
-              {publishedAt: {$gt: minTimestamp}},
-              {"socialUpdatedAt":{"$ne":null}}
-            ]}},
-            { "$count": "total" }
+          'socialAdded': [
+            {
+              '$match': {
+                '$and': [
+                  {publishedAt: {$gt: minTimestamp}},
+                  {'socialUpdatedAt': {'$ne': null}}
+                ]
+              }
+            },
+            {'$count': 'total'}
           ],
-          "averageWordLength": [
-            { "$match" : {publishedAt: {$gt: minTimestamp}}},
-            { $group: {_id: null, average: {$avg: "$wordCount"}}}
+          'averageWordLength': [
+            {'$match': {publishedAt: {$gt: minTimestamp}}},
+            {$group: {_id: null, average: {$avg: '$wordCount'}}}
           ],
-        }},
-      {"$project": {
-        "total": { "$arrayElemAt": ["$total.total", 0] },
-        "unfluffed": { "$arrayElemAt": ["$unfluffed.total", 0] },
-        "keywordsAdded": { "$arrayElemAt": ["$keywordsAdded.total", 0] },
-        "socialAdded": { "$arrayElemAt": ["$socialAdded.total", 0] },
-        "averageWordLength": { "$arrayElemAt": ["$averageWordLength.average", 0] },
-      }},
+        }
+      },
+      {
+        '$project': {
+          'total': {'$arrayElemAt': ['$total.total', 0]},
+          'unfluffed': {'$arrayElemAt': ['$unfluffed.total', 0]},
+          'keywordsAdded': {'$arrayElemAt': ['$keywordsAdded.total', 0]},
+          'socialAdded': {'$arrayElemAt': ['$socialAdded.total', 0]},
+          'averageWordLength': {'$arrayElemAt': ['$averageWordLength.average', 0]},
+        }
+      },
     ]).toArray();
 
     return counts[0];
+  },
+
+  getTotalPosts: (hoursBack) => {
+    if (!hoursBack) {
+      hoursBack = 48;
+    }
+    const minTimestamp = moment.utc().subtract(hoursBack, 'h').toDate();
+
+    return Post.getCollection().find({
+      "publishedAt": { "$gt": minTimestamp }
+    }).count();
   },
 
   getSocialCounts: async (hoursBack) => {
@@ -193,35 +220,39 @@ module.exports = {
     const minTimestamp = moment.utc().subtract(hoursBack, 'h').toDate();
 
     const counts = (await Post.getCollection().aggregate([
-      { "$facet": {
-          "total": [
-            { "$match" : {publishedAt: {$gt: minTimestamp}}},
-            { $group: {_id: null, total: {$sum: '$social.total'}}},
+      {
+        '$facet': {
+          'total': [
+            {'$match': {publishedAt: {$gt: minTimestamp}}},
+            {$group: {_id: null, total: {$sum: '$social.total'}}},
           ],
-          "facebook": [
-            { "$match" : {publishedAt: {$gt: minTimestamp}}},
-            { $group: {_id: null, total: {$sum: '$social.facebook'}}},
+          'facebook': [
+            {'$match': {publishedAt: {$gt: minTimestamp}}},
+            {$group: {_id: null, total: {$sum: '$social.facebook'}}},
           ],
-          "twitter": [
-            { "$match" : {publishedAt: {$gt: minTimestamp}}},
-            { $group: {_id: null, total: {$sum: '$social.twitter'}}},
+          'twitter': [
+            {'$match': {publishedAt: {$gt: minTimestamp}}},
+            {$group: {_id: null, total: {$sum: '$social.twitter'}}},
           ],
-          "pinterest": [
-            { "$match" : {publishedAt: {$gt: minTimestamp}}},
-            { $group: {_id: null, total: {$sum: '$social.pinterest'}}},
+          'pinterest': [
+            {'$match': {publishedAt: {$gt: minTimestamp}}},
+            {$group: {_id: null, total: {$sum: '$social.pinterest'}}},
           ],
-          "reddit": [
-            { "$match" : {publishedAt: {$gt: minTimestamp}}},
-            { $group: {_id: null, total: {$sum: '$social.reddit'}}},
+          'reddit': [
+            {'$match': {publishedAt: {$gt: minTimestamp}}},
+            {$group: {_id: null, total: {$sum: '$social.reddit'}}},
           ],
-        }},
-      { "$project": {
-          "total": {"$arrayElemAt": ["$total", 0] },
-          "facebook": {"$arrayElemAt": ["$facebook", 0] },
-          "twitter": {"$arrayElemAt": ["$twitter", 0] },
-          "pinterest": {"$arrayElemAt": ["$pinterest", 0] },
-          "reddit": {"$arrayElemAt": ["$reddit", 0] },
-        }},
+        }
+      },
+      {
+        '$project': {
+          'total': {'$arrayElemAt': ['$total', 0]},
+          'facebook': {'$arrayElemAt': ['$facebook', 0]},
+          'twitter': {'$arrayElemAt': ['$twitter', 0]},
+          'pinterest': {'$arrayElemAt': ['$pinterest', 0]},
+          'reddit': {'$arrayElemAt': ['$reddit', 0]},
+        }
+      },
     ]).toArray()).map(results => ({
       total: results.total.total,
       facebook: results.facebook.total,

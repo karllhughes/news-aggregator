@@ -31,7 +31,7 @@ module.exports = {
     try {
       const countHoursBack = 168;
       counts = {
-        posts: (await Post.getCounts(countHoursBack)).total,
+        posts: await Post.getTotalPosts(countHoursBack),
         sources: (await Source.getCounts(countHoursBack)).active,
         social: (await Post.getSocialCounts(countHoursBack)).total,
       };
