@@ -20,7 +20,7 @@ News and blog data aggregator. Uses Feedbin, SharedCount, and open source natura
 - `npm run app:add-post-social` Get social share counts from [SharedCount](https://www.sharedcount.com/).
 
 
-## Deploying to Hyper.sh
+## Deploying
 
 Deploy the database and attach an IP: 
 
@@ -37,7 +37,6 @@ Build and push the Docker image:
 ```bash
 docker build -t karllhughes/news .
 docker push karllhughes/news
-hyper pull karllhughes/news
 ```
 
 Run the collector(s):

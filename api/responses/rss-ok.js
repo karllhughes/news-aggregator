@@ -1,5 +1,9 @@
 const RSS = require('rss');
 
+function getPopularity(post) {
+  return post.social ? (post.social.total || 0) : 0;
+}
+
 module.exports = function rssOk(data) {
   this.res.set('Content-Type', 'text/xml');
   const feed = new RSS(data.feedOptions);
@@ -13,7 +17,7 @@ module.exports = function rssOk(data) {
       author: post.author || null,
       date: post.publishedAt,
       custom_elements: [
-        { 'popularity': (post.social.total || 0) },
+        { 'popularity': getPopularity(post) },
       ],
     })
   });

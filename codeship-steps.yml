@@ -8,6 +8,6 @@
     image_name: karllhughes/news
     image_tag: latest
     encrypted_dockercfg_path: dockercfg.encrypted
-  - service: deployer
-    command: sh /scripts/deploy.sh
-    tag: master
+#  - service: deployer
+#    command: sh /scripts/deploy.sh
+#    tag: master
