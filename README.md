@@ -88,8 +88,6 @@ hyper cron create --hour=1 --minute=1 --env-file=.env.backup --size s4 --name ne
 - [Sails 1.0](https://sailsjs.com)
 - [Docker](https://www.docker.com/)
 - [Node 9](https://nodejs.org/en/blog/release/v9.9.0/)
-- [Hyper.sh](https://hyper.sh/)
-
 
 ## License
 

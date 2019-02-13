@@ -17,8 +17,9 @@ module.exports = function rssOk(data) {
       author: post.author || null,
       date: post.publishedAt,
       custom_elements: [
-        { 'popularity': getPopularity(post) },
+        { popularity: getPopularity(post) },
       ],
+      enclosure: { url: post.imageUrl ? post.imageUrl : '' },
     })
   });
 
